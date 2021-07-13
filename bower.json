@@ -19,6 +19,7 @@
     "jquery.counterup": "^2.1.0",
     "jquery-sparkline": "^2.1.3",
     "counterup": "^1.0.0",
-    "ckeditor": "#full/4.13.0"
+    "ckeditor": "#full/4.13.0",
+    "font-awesome": "fontawesome#^5.15.3"
   }
 }

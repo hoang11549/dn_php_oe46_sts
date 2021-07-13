@@ -20,4 +20,13 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('pages.trainee.home');
 })->name('home');
+Route::get('/report', function () {
+    return view('pages.trainee.reportDaily');
+})->name('report');
+Route::get('/historyReport', function () {
+    return view('pages.trainee.historyReport');
+})->name('historyReport');
+Route::get('/profile', function () {
+    return view('pages.trainee.profile');
+})->name('profile');
 Route::get('language/{language}', [LanguageController::class, 'index'])->name('language');
