@@ -40,4 +40,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'user_subject', 'user_id', 'subject_id');
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'user_course', 'user_id', 'course_id');
+    }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imgable');
+    }
+
+    public function ownerCourse()
+    {
+        return $this->hasMany(Course::class);
+    }
 }
