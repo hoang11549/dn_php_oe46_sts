@@ -11,9 +11,10 @@
     <meta name="description"
         content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-<link rel="stylesheet" href="{{ asset('assets/css/search.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/search.css') }}">
     <link href="{{ asset('assets/css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/flexCard.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/card.css') }}">
 
     <script src="{{ asset("bower_components/ckeditor/ckeditor.js") }}"></script>
 </head>
@@ -69,7 +70,7 @@
     <script src="{{ asset('bootstrap/dist/js/bootstrap.bundle.min.js ')}}"></script>
     <script src="{{ asset('assets/js/app-style-switcher.js') }}"></script>
     <script src="{{ asset('/bower_components/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
-
+<script src="{{ asset('/bower_components/font-awesome/js/all.min.js') }}"></script>
     <!--------------Code by Member------------------->
     <!--Wave Effects -->
     <script src="{{ asset('assets/js/waves.js') }}"></script>

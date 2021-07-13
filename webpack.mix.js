@@ -29,4 +29,7 @@ mix.js('resources/js/sidebarmenu.js','public/assets/js/sidebarmenu.js')
 mix.js('resources/js/waves.js','public/assets/js/waves.js')
 mix.js('resources/js/pages/dashboards/dashboard1.js','public/assets/js/pages/dashboards/dashboard1.js')
 mix.js('resources/js/cket.js','public/assets/js/cket.js')
-mix.js('resources/js/searchList.js','public/asstets/js/searchList.js')
+// mix.js('resources/js/searchList.js','public/asstets/js/searchList.js')
+
+/**--------scss------------- */
+mix.sass('resources/sass/card.scss','public/assets/css/card.css')
