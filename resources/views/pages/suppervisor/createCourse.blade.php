@@ -13,7 +13,7 @@
     </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">{{ trans('messages.Topic') }}</label>
-    <select class="form-control" id="exampleFormControlSelect1" name="Topic">
+    <select class="form-control" id="exampleFormControlSelect1" name="topic">
         <option value="1">PHP</option>
         <option value="2">Ruby</option>
     </select>

@@ -29,8 +29,8 @@
                                 <td>{{ $course->name }}</td>
                                 <td>{{ $course->start_date }}</td>
                                 <td>{{ $course->duration }}</td>
-                                <td><a href="{{ route('listCourse.show',$course->id)}}"><i class="fas fa-eye"></i></a></td>
-                                <td><a href="#"><i class="fas fa-edit"></i></a></td>
+                                <td><a href="{{ route('listCourse.show', ['listCourse' => $course->id]) }}"><i class="fas fa-eye"></i></a></td>
+                                <td><a href="{{ route('listCourse.edit', ['listCourse' => $course->id]) }}"><i class="fas fa-edit"></i></a></td>
                                 <td>
                                     <form action="{{ route('listCourse.destroy',$course->id)}}"
                                         method="POST">

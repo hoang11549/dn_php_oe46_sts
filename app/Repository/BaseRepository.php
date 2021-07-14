@@ -28,10 +28,35 @@ abstract class BaseRepository implements RepositoryInterface
         return $result;
     }
 
+    public function findBeLongMany($arrayCh, $coloum)
+    {
+        $arraySubject = [];
+        foreach ($arrayCh->subjects as $i => $course_subject) {
+            $subject = $course_subject->pivot->where($coloum, $arrayCh->id)->get();
+            $listSubject = $this->findOrFail($subject[$i]->subject_id);
+            array_push($arraySubject, $listSubject);
+        }
+
+        return $arraySubject;
+    }
+
     public function findOrFail($id)
     {
         try {
             $find = $this->model->findOrFail($id);
+        } catch (ModelNotFoundException $exception) {
+            Log::debug("Id not found");
+
+            return false;
+        }
+
+        return $find;
+    }
+
+    public function findWhere($colum, $para)
+    {
+        try {
+            $find = $this->model->where($colum, $para);
         } catch (ModelNotFoundException $exception) {
             Log::debug("Id not found");
 
