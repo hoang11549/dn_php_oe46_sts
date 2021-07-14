@@ -26,4 +26,10 @@ return [
     'UserName' => 'User Name',
     'Address' => 'Address',
     'Age' => 'Age',
+    'trainee' => 'Trainee in course',
+    'CourseSb' => 'Course\'s subject',
+    'Read' => 'Read more',
+    'Lesson' => 'Lesson of subject',
+    'lesson' => 'lesson',
+    'Comments' => 'Your Comment',
 ];

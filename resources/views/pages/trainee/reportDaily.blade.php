@@ -26,6 +26,7 @@
                         </div>
                       </div>
                     </div>
+<<<<<<< HEAD
                     <div class="form-group"> 
                         <label class="col-md-4 control-label">{{ trans('messages.Category') }}</label>
                           <div class="col-md-4 selectContainer">
@@ -39,6 +40,9 @@
                             </div>
                           </div>
                     </div>
+=======
+                    
+>>>>>>> View User UI2
                     <div class="form-group"> 
                         <label class="col-md-4 control-label">{{ trans('messages.Datetime') }}:</label>                    
                             <input type="date"class="form-control" id="datetime" name="datetime">

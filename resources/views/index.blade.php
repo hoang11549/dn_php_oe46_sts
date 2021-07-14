@@ -15,7 +15,11 @@
     <link href="{{ asset('assets/css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/flexCard.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/card.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('assets/css/detailCourse.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/detailSubject.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/detailReport.css') }}">
+    
+    
     <script src="{{ asset("bower_components/ckeditor/ckeditor.js") }}"></script>
 </head>
 

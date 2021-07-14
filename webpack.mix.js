@@ -20,7 +20,11 @@ mix.styles('resources/css/style.css','public/assets/css/style.css')
 mix.styles('resources/css/style.min.css','public/assets/css/style.min.css')
 mix.styles('resources/css/flexCard.css','public/assets/css/flexCard.css')
 mix.styles('resources/css/search.css', 'public//assets/css/search.css')
-mix.styles('resource/css/listStudent.css','public//assets/css/listStudent.css')
+mix.styles('resources/css/listStudent.css','public//assets/css/listStudent.css')
+mix.styles('resources/css/detailCourse.css','public//assets/css/detailCourse.css')
+mix.styles('resources/css/detailSubject.css','public//assets/css/detailSubject.css')
+mix.styles('resources/css/detailReport.css','public//assets/css/detailReport.css')
+
 /*---------------js----------*/
 mix.js('resources/js/app-style-switcher.js','public/assets/js/app-style-switcher.js')
 mix.js('resources/js/bootstrap.js','public/assets/js/bootstrap.js')

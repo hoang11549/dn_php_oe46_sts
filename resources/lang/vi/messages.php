@@ -26,4 +26,10 @@ return [
     'UserName' => 'Tài khoản',
     'Address' => 'Địa chỉ',
     'Age' => 'Tuổi',
+    'trainee' => 'thành viên của khóa học',
+    'CourseSb' => 'Môn học của khóa',
+    'Read' => 'chi tiết',
+    'Lesson' => 'bài học của môn',
+    'lesson' => 'bài học',
+    'Comments' => 'bình luận của bạn',
 ];
