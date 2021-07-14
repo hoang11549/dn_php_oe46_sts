@@ -8,7 +8,6 @@ use App\Repository\Topic\TopicRepositoryInterface;
 use App\Repository\Course\CourseRepositoryInterface;
 use App\Repository\Subject\SubjectRepositoryInterface;
 
-
 class CourseController extends Controller
 {
     protected $courseRepository;
@@ -64,7 +63,7 @@ class CourseController extends Controller
             "start_date" => date('Y-m-d', $inputDate),
             "duration" => $request->duration,
             "user_id" => 1,
-            "topic_id" => $request->Topic,
+            "topic_id" => $request->topic,
         ];
         $courses = $this->courseRepository->create($reviewData);
         $course =  $this->courseRepository->find($courses->id);
