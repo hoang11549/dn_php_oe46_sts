@@ -1,5 +1,4 @@
-
- @extends('index')
+@extends('index')
 @section( 'content')
 <div class="container-fluid">       
     <div class="row">
@@ -8,7 +7,9 @@
                
                 <h3 class="box-title">{{ trans('messages.ListCourse') }}</h3>
                  <div class="btn-container">
+                     <a href="{{ route('listCourse.create')}}">
                     <button class="increase">+</button>
+                </a>
                    </div>
                 <div class="table-responsive">
                     <table class="table text-nowrap">

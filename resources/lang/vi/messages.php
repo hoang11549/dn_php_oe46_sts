@@ -27,5 +27,10 @@ return [
     'Address' => 'Địa chỉ',
     'Age' => 'Tuổi',
     'StartDay' => 'Ngày bắt đầu',
-    'EndDay' => 'Ngày kết thúc'
+    'EndDay' => 'Ngày kết thúc',
+    'nameCourse' => 'Tên khóa học',
+    'Topic' => 'Chủ đề',
+    'ImageFile' => 'Hình ảnh khóa học',
+    'AddCourse' => 'tạo mới khóa học',
+    'nameErr' => ' yeu cau ten',
 ];

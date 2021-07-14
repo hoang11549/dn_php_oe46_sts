@@ -27,5 +27,10 @@ return [
     'Address' => 'Address',
     'Age' => 'Age',
     'StartDay' => 'Start Day',
-    'EndDay' => 'End Day'
+    'EndDay' => 'End Day',
+    'nameCourse' => 'Name Course',
+    'Topic' => 'Topic',
+    'ImageFile' => 'Course\' image',
+    'AddCourse' => 'Add Course',
+    'nameErr' => 'require name',
 ];

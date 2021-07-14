@@ -69,9 +69,13 @@
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ asset('bootstrap/dist/js/bootstrap.bundle.min.js ')}}"></script>
+    <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js ')}}"></script>
     <script src="{{ asset('assets/js/app-style-switcher.js') }}"></script>
     <script src="{{ asset('/bower_components/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
-<script src="{{ asset('/bower_components/font-awesome/js/all.min.js') }}"></script>
+    <script src="{{ asset('/bower_components/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ asset('/bower_components/font-awesome/js/all.min.js') }}"></script>
+    
+    
     <!--------------Code by Member------------------->
     <!--Wave Effects -->
     <script src="{{ asset('assets/js/waves.js') }}"></script>
@@ -80,7 +84,8 @@
     <!--Custom JavaScript -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
       <!-- searchList -->
-
+    <script src="{{ asset('assets/js/validate.js') }}"></script>
+    <script src="{{ asset('assets/js/valiJquery.js') }}"></script>
     <!--This page JavaScript -->
     <script src="{{ asset('assets/js/pages/dashboards/dashboard1.js') }}"></script>
 </body>
