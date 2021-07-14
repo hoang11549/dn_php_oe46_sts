@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/detailCourse.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/detailSubject.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/detailReport.css') }}">
-    <script src="{{ asset("bower_components/ckeditor/ckeditor.js") }}"></script>
+    <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 </head>
 
 <body>
