@@ -27,19 +27,6 @@
                       </div>
                     </div>
                     <div class="form-group"> 
-                        <label class="col-md-4 control-label">{{ trans('messages.Category') }}</label>
-                          <div class="col-md-4 selectContainer">
-                            <div class="input-group">    
-                                <select name="category" class="form-control selectpicker" >
-                                    <option value=" " >Mobile</option>
-                                    <option>Front-end</option>
-                                    <option>Ruby</option>
-                                    <option >Laravel</option>
-                                </select>
-                            </div>
-                          </div>
-                    </div>
-                    <div class="form-group"> 
                         <label class="col-md-4 control-label">{{ trans('messages.Datetime') }}:</label>                    
                             <input type="date"class="form-control" id="datetime" name="datetime">
                     </div>
