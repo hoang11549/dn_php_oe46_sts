@@ -47,4 +47,10 @@ return [
     'ConfirmYourPassword' => 'Vui lòng xác nhận mật khẩu của bạn trước khi tiếp tục',
     'ResetPassword' => 'Đặt lại mật khẩu',
     'SendPasswordResetLink' => 'Gửi liên kết đặt lại mật khẩu',
+    'day' => 'ngày',
+    'author' => 'người tạo',
+    'Update' => 'cập nhật',
+    'EditCourse' => 'cập nhật khóa học',
+    'duration' => 'duration',
+    'subject' => 'Môn học',
 ];

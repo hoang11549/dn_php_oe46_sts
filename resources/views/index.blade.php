@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/detailSubject.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/detailReport.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/buttonAdd.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/checkBox.css') }}">
     <!--JS-->  
     <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 </head>
@@ -35,7 +36,6 @@
      @include('layout.header')
  
         <!-- End Topbar header -->
- 
  
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
  

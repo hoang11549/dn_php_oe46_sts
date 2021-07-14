@@ -19,6 +19,8 @@ interface RepositoryInterface
 
     public function findOrFail($id);
 
+    public function findBeLongMany($course, $coloum);
+
     public function listPaginate($num);
     /**
      * Create

@@ -26,6 +26,19 @@
         <label for="">{{ trans('messages.duration') }}</label>
         <input type="number" name="duration" class="form-control" id="yourmail" placeholder="enter day">
     </div>
+
+    <div class="field-container inline-label-form">
+        <label for="">{{ trans('messages.subject') }}</label>
+        <div class="field-boxes quarter">
+            @foreach($subject as $subjects)
+                <label>
+                    <input type="checkbox" name="subject[]" value="{{ $subjects->id }}">
+                    <span>{{ $subjects->name }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+      
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @endsection

@@ -1,28 +1,29 @@
 @extends('index')
 @section( 'content')
+
 <div class="blog-card">
     <div class="meta">
-      <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
+      <div class="photo" style="background-image: url({{ asset($imageLink) }})"></div>
       <ul class="details">
         <li class="author"><a href="#">John Doe</a></li>
-        <li class="date">Aug. 24, 2015</li>
+        <li class="date">{{ $course->start_date }}</li>
         <li class="tags">
           <ul>
-            <li><a href="#">HTML</a></li>
-            <li><a href="#">CSS</a></li>
+            <li><a href="#">{{ $course->topic->name }}</a></li>    
           </ul>
         </li>
       </ul>
     </div>
     <div class="description">
-      <h1>Learning to Code</h1>
-      <h2>Opening a door to the future</h2>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-
+      <h1>{{ $course->name }}(Active)</h1>
+      <h2>{{ $course->duration }} {{ trans('messages.day') }}</h2>
+      <h2>{{ trans('messages.EndDay') }}: {{ $endday }}</h2>
+      <h2>{{ trans('messages.author') }}: John Doe</h2>
     </div>
   </div>
   <div class="row">
     <!-- .col -->
+   
     <div class="col-md-12 col-lg-8 col-sm-12">
         <div class="white-box">
             <h2>{{ trans('messages.CourseSb') }}</h2>
@@ -31,76 +32,25 @@
         <div class="center-line">
             <a href="#" class="scroll-icon"><i class="fas fa-caret-up"></i></a>
         </div>
-        <div class="row row-1">
-            <section>
+        @foreach($arraySubject as $key => $subject)
+            @if($key==0 || $key%2==0)
+                <div class="row row-1">
+            @else    
+                <div class="row row-2">
+            @endif
+                <section>
                 <i class="icon far fa-circle"></i>
-                <div class="details">
-                <span class="title">Subject 1</span>
-                <span>1st Jan 2021</span>
-                </div>
-                <p>Lorem ipsum dolor sit ameters consectetur adipisicing elit. Sed qui veroes praesentium maiores, sint eos vero sapiente voluptas debitis dicta dolore.</p>
-                <div class="bottom">
-                <a href="#">Read more</a>
-
-                </div>
-            </section>
-        </div>
-            <div class="row row-2">
-            <section>
-                <i class="icon far fa-check-circle"></i>
-                <div class="details">
-                    <span class="title">Subject 2</span>
-                    <span>2nd Jan 2021</span>
-                </div>
-                <p>Lorem ipsum dolor sit ameters consectetur adipisicing elit. Sed qui veroes praesentium maiores, sint eos vero sapiente voluptas debitis dicta dolore.</p>
-                <div class="bottom">
-                    <a href="#">Read more</a>
-
-                </div>
-            </section>
+                    <div class="details">
+                        <span class="title">{{ $subject->name }}</span>
+                        <span>{{$subject->duration}} {{ trans('messages.day') }}</span>
+                    </div>
+                    <p>{{ $subject->description }}</p>
+                    <div class="bottom">
+                        <a href="#">{{ trans('messages.read') }}</a>
+                    </div>
+                </section>
             </div>
-            <div class="row row-1">
-            <section>
-                <i class="icon far fa-check-circle"></i>
-                <div class="details">
-                    <span class="title">Subject 3</span>
-                    <span>3rd Jan 2021</span>
-                </div>
-                    <p>Lorem ipsum dolor sit ameters consectetur adipisicing elit. Sed qui veroes praesentium maiores, sint eos vero sapiente voluptas debitis dicta dolore.</p>
-                <div class="bottom">
-                    <a href="#">Read more</a>
-
-                </div>
-            </section>
-            </div>
-            <div class="row row-2">
-            <section>
-                <i class="icon far fa-check-circle"></i>
-                <div class="details">
-                    <span class="title">Subject 4</span>
-                    <span>4th Jan 2021</span>
-                </div>
-                    <p>Lorem ipsum dolor sit ameters consectetur adipisicing elit. Sed qui veroes praesentium maiores, sint eos vero sapiente voluptas debitis dicta dolore.</p>
-                <div class="bottom">
-                    <a href="#">Read more</a>
-
-                </div>
-            </section>
-            </div>
-            <div class="row row-1">
-            <section>
-                <i class="icon far fa-check-circle"></i>
-                <div class="details">
-                    <span class="title">Title of Section 5</span>
-                    <span>5th Jan 2021</span>
-                </div>
-                <p>Lorem ipsum dolor sit ameters consectetur adipisicing elit. Sed qui veroes praesentium maiores, sint eos vero sapiente voluptas debitis dicta dolore.</p>
-                <div class="bottom">
-                    <a href="#">Read more</a>
-
-                </div>
-            </section>
-            </div>
+        @endforeach
             <div class="row row-2">
             <section>
                 <i class="icon far fa-check-circle"></i>
@@ -113,11 +63,11 @@
                     <a href="#">Read more</a>
 
                 </div>
-            </section>
+                </section>
+                </div>
             </div>
         </div>
     </div>
-</div>
     <div class="col-lg-4 col-md-12 col-sm-12">
         <div class="card white-box p-0">
             <div class="card-heading">

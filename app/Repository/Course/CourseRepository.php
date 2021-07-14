@@ -7,6 +7,7 @@ use App\Repository\BaseRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Image;
+use Illuminate\Support\Facades\DB;
 
 class CourseRepository extends BaseRepository implements CourseRepositoryInterface
 {
@@ -20,7 +21,7 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
         $date = Carbon::create($day);
         $date->addDays($duration);
 
-        return $date;
+        return $date->toFormattedDateString();
     }
 
     public function handleImg(Request $request, $CourseID, $nameImage)
@@ -37,5 +38,34 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
                 'url' => $path . $name,
             ]);
         }
+    }
+
+    public function search($request, $coloum)
+    {
+        $output = '';
+        $courses = DB::table('courses')->where($coloum, 'LIKE', '%' . $request->search . '%')->get();
+        if ($courses) {
+            foreach ($courses as $key => $course) {
+                $output .= '<tr>
+                    <td>' . $course->name . '</td>
+                    <td>' . $course->start_date . '</td>
+                    <td>' . $course->duration . '</td>' .
+                    '<td><a href="listCourse/' . $course->id . '" ><i class="fas fa-eye"></i></a></td>
+                    <td><a href="listCourse/' . $course->id . 'edit/" }}><i class="fas fa-edit"></i></a></td>
+                    <td>
+                        <form action="listCourse/' . $course->id . '"
+                            method=POST>
+                                ' . csrf_field() . '
+                    ' . method_field('DELETE') . ' 
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                        </form>
+                    </td>
+                    </tr>';
+            }
+        }
+
+        return Response($output);
     }
 }

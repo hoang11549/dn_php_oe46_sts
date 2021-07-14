@@ -11,4 +11,6 @@ interface CourseRepositoryInterface extends RepositoryInterface
     public function endDay($day, $duration);
 
     public function handleImg(Request $image, $arrayCourse, $nameImage);
+
+    public function search($request, $coloum);
 }

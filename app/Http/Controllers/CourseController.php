@@ -4,16 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use App\Repository\Topic\TopicRepositoryInterface;
 use App\Repository\Course\CourseRepositoryInterface;
-use Carbon\Carbon;
+use App\Repository\Subject\SubjectRepositoryInterface;
+
 
 class CourseController extends Controller
 {
     protected $courseRepository;
-    public function __construct(CourseRepositoryInterface $courseRepository)
-    {
+    protected $subjectRepository;
+    protected $topicRepository;
+
+    public function __construct(
+        CourseRepositoryInterface $courseRepository,
+        SubjectRepositoryInterface $subjectRepository,
+        TopicRepositoryInterface $topicRepository
+    ) {
         $this->courseRepository = $courseRepository;
+        $this->subjectRepository = $subjectRepository;
+        $this->topicRepository = $topicRepository;
     }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +45,9 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('pages.suppervisor.createCourse');
+        $subject = $this->subjectRepository->getAll();
+
+        return view('pages.suppervisor.createCourse', compact('subject'));
     }
 
     /**
@@ -53,6 +67,12 @@ class CourseController extends Controller
             "topic_id" => $request->Topic,
         ];
         $courses = $this->courseRepository->create($reviewData);
+        $course =  $this->courseRepository->find($courses->id);
+
+        $listSubject = $request->subject;
+        foreach ($listSubject as $list) {
+            $course->tags()->attach($list);
+        }
         $this->courseRepository->handleImg($request, $courses->id, 'courseImage');
 
         return redirect()->route('listCourse.create');
@@ -66,9 +86,13 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $detailCourse = $this->courseRepository->findOrFail($id)->with('topic')->first();
-        if ($detailCourse) {
-            return view('pages.trainee.detailCourse', compact('detailCourse'));
+        $course = $this->courseRepository->findOrFail($id)->with('topic')->first();
+        if ($course) {
+            $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id');
+            $imageLink = $course->image->url;
+            $endday = $this->courseRepository->endDay($course->start_date, $course->duration);
+
+            return view('pages.trainee.detailCourse', compact('course', 'arraySubject', 'imageLink', 'endday'));
         }
 
         return back()->withError('notFound');
@@ -82,6 +106,15 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
+        $course = $this->courseRepository->findOrFail($id)->with('topic')->first();
+        $listTopic = $this->topicRepository->getAll();
+        if ($course) {
+            $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id');
+
+            return view('pages.suppervisor.editCourse', compact('course', 'arraySubject', 'listTopic'));
+        }
+
+        return view('pages.suppervisor.createCourse');
     }
 
     /**
@@ -93,6 +126,18 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $inputDate = strtotime($request->dateStart);
+        $reviewData = [
+            "name"  =>  $request->nameCourse,
+            "start_date" => date('Y-m-d', $inputDate),
+            "duration" => $request->duration,
+            "user_id" => 1,
+            "topic_id" => $request->Topic,
+        ];
+        $courses = $this->courseRepository->update($id, $reviewData);
+        $this->courseRepository->handleImg($request, $courses->id, 'courseImage');
+
+        return redirect()->route('listCourse.index');
     }
 
     /**
@@ -108,5 +153,12 @@ class CourseController extends Controller
         }
 
         return redirect()->route('listCourse.index')->withError('notDelete');
+    }
+
+    public  function search(Request $request)
+    {
+        if ($request->ajax()) {
+            return $this->courseRepository->search($request, 'name');
+        }
     }
 }

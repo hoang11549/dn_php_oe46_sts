@@ -47,4 +47,10 @@ return [
     'ConfirmYourPassword' => 'Please confirm your password before continuing',
     'ResetPassword' => 'Reset password',
     'SendPasswordResetLink' => 'Send Password Reset Link',
+    'day' => 'day',
+    'author' => 'author',
+    'Update' => 'Update',
+    'EditCourse' => 'Edit Course',
+    'duration' => 'duration',
+    'subject' => 'Subject',
 ];
