@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/detailCourse.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/detailSubject.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/detailReport.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/buttonAdd.css') }}">
+    <!--JS-->  
     <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 </head>
 
@@ -46,10 +48,7 @@
      
             <!-- Container fluid  -->
      @yield('content')
-            
-     
             <!-- End Container fluid  -->
-     
      
             <!-- footer -->
      

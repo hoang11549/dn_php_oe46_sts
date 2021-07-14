@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +39,8 @@ Route::get('/detailSubject', function () {
 Route::get('/detailReport', function () {
     return view('pages.trainee.detailReport');
 })->name('detailReport');
+Route::resource('listCourse', CourseController::class)->only([
+    'index', 'show', 'destroy',
+]);
+
 Route::get('language/{language}', [LanguageController::class, 'index'])->name('language');
