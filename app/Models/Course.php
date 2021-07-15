@@ -18,6 +18,7 @@ class Course extends Model
         'user_id',
         'topic_id',
     ];
+    protected $with = ['topic'];
 
     public function topic()
     {

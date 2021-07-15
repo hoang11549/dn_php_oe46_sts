@@ -26,4 +26,6 @@ return [
     'UserName' => 'User Name',
     'Address' => 'Address',
     'Age' => 'Age',
+    'StartDay' => 'Start Day',
+    'EndDay' => 'End Day'
 ];

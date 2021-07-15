@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
-use App\repository\course\CourseRepositoryInterface;
+use App\Repository\Course\CourseRepositoryInterface;
+use Carbon\Carbon;
 
 class CourseController extends Controller
 {
@@ -19,6 +21,9 @@ class CourseController extends Controller
      */
     public function index()
     {
+        $courses = $this->courseRepository->listPaginate(config('training.paginate_course'));
+
+        return view('pages.suppervisor.listCourse', compact('courses'));
     }
 
     /**
@@ -48,6 +53,12 @@ class CourseController extends Controller
      */
     public function show($id)
     {
+        $detailCourse = $this->courseRepository->findOrFail($id)->with('topic')->first();
+        if ($detailCourse) {
+            return view('pages.trainee.detailCourse', compact('detailCourse'));
+        }
+
+        return back()->withError('notFound');
     }
 
     /**
@@ -79,5 +90,10 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
+        if ($this->courseRepository->delete($id)) {
+            return redirect()->route('listCourse.index');
+        }
+
+        return redirect()->route('listCourse.index')->withError('notDelete');
     }
 }

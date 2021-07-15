@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repository;
 
-use App\Repositories\RepositoryInterface;
+use App\Repository\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Log;
 
 abstract class BaseRepository implements RepositoryInterface
 {
@@ -26,6 +28,24 @@ abstract class BaseRepository implements RepositoryInterface
         return $result;
     }
 
+    public function findOrFail($id)
+    {
+        try {
+            $find = $this->model->findOrFail($id);
+        } catch (ModelNotFoundException $exception) {
+            Log::debug("Id not found");
+
+            return false;
+        }
+
+        return $find;
+    }
+
+    public function listPaginate($num)
+    {
+        return $this->model->paginate($num);
+    }
+
     public function create($attributes = [])
     {
         return $this->model->create($attributes);
@@ -33,7 +53,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function update($id, $attributes = [])
     {
-        $result = $this->find($id);
+        $result = $this->findOrFail($id);
         if ($result) {
             $result->update($attributes);
 
@@ -53,5 +73,10 @@ abstract class BaseRepository implements RepositoryInterface
         }
 
         return false;
+    }
+
+    public function orderBy($colum, $orderBy)
+    {
+        return $this->model->orderBy($colum, $orderBy)->get();
     }
 }

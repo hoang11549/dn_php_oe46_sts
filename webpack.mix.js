@@ -24,6 +24,7 @@ mix.styles('resource/css/listStudent.css','public/assets/css/listStudent.css')
 mix.styles('resources/css/detailCourse.css','public/assets/css/detailCourse.css')
 mix.styles('resources/css/detailSubject.css','public/assets/css/detailSubject.css')
 mix.styles('resources/css/detailReport.css','public/assets/css/detailReport.css')
+mix.styles('resources/css/buttonAdd.css','public/assets/css/buttonAdd.css')
 /*---------------js----------*/
 mix.js('resources/js/app-style-switcher.js','public/assets/js/app-style-switcher.js')
 mix.js('resources/js/bootstrap.js','public/assets/js/bootstrap.js')
@@ -32,7 +33,5 @@ mix.js('resources/js/sidebarmenu.js','public/assets/js/sidebarmenu.js')
 mix.js('resources/js/waves.js','public/assets/js/waves.js')
 mix.js('resources/js/pages/dashboards/dashboard1.js','public/assets/js/pages/dashboards/dashboard1.js')
 mix.js('resources/js/cket.js','public/assets/js/cket.js')
-// mix.js('resources/js/searchList.js','public/asstets/js/searchList.js')
-
 /**--------scss------------- */
 mix.sass('resources/sass/card.scss','public/assets/css/card.css')

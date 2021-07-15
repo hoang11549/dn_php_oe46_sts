@@ -26,4 +26,6 @@ return [
     'UserName' => 'Tài khoản',
     'Address' => 'Địa chỉ',
     'Age' => 'Tuổi',
+    'StartDay' => 'Ngày bắt đầu',
+    'EndDay' => 'Ngày kết thúc'
 ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repository;
 
 interface RepositoryInterface
 {
@@ -17,6 +17,9 @@ interface RepositoryInterface
      */
     public function find($id);
 
+    public function findOrFail($id);
+
+    public function listPaginate($num);
     /**
      * Create
      * @param array $attributes
@@ -38,4 +41,6 @@ interface RepositoryInterface
      * @return mixed
      */
     public function delete($id);
+
+    public function orderBy($colum, $orderBy);
 }
