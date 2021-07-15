@@ -16,7 +16,7 @@
                     <ul class="flex-card-list">
                         <li>
                           <div class="flex-card">
-                            <div class="card-img"><img src="http://placehold.it/350x150"></div>
+                            <div class="card-img"><img src="{{ asset('images/large/2.jpg') }}"></div>
                             <div class="card-content">
                               <h3>First</h3>
                               <div class="text">
@@ -28,7 +28,7 @@
                         </li>
                         <li>
                           <div class="flex-card">
-                            <div class="card-img"><img src="http://placehold.it/350x150"></div>
+                            <div class="card-img"><img src="{{ asset('images/large/3.jpg') }}"></div>
                             <div class="card-content">
                               <h3>First</h3>
                               <div class="text">
@@ -41,7 +41,7 @@
                         </li>
                         <li>
                           <div class="flex-card">
-                            <div class="card-img"><img src="http://placehold.it/350x150"></div>
+                            <div class="card-img"><img src="{{ asset('images/large/4.jpg') }}"></div>
                             <div class="card-content">
                               <h3>First</h3>
                               <div class="text">
@@ -53,7 +53,7 @@
                         </li>
                         <li>
                           <div class="flex-card">
-                            <div class="card-img"><img src="{{ asset('images/users/varun.jpg') }}"></div>
+                            <div class="card-img"><img src="{{ asset('images/large/7.jpg') }}"></div>
                             <div class="card-content">
                               <h3>First</h3>
                               <div class="text">
@@ -65,7 +65,7 @@
                         </li>
                         <li>
                           <div class="flex-card">
-                            <div class="card-img"><img src="{{ asset('images/users/varun.jpg') }}"></div>
+                            <div class="card-img"><img src="{{ asset('images/large/6.jpg') }}"></div>
                             <div class="card-content">
                               <h3>First</h3>
                               <div class="text">
@@ -94,7 +94,6 @@
                       </li>
                     </ul>
                   </nav>
-               
             </div>
         </div>
     </div>
