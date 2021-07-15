@@ -33,6 +33,7 @@ class CourseController extends Controller
      */
     public function create()
     {
+        return view('pages.suppervisor.createCourse');
     }
 
     /**
@@ -43,6 +44,18 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        $inputDate = strtotime($request->dateStart);
+        $reviewData = [
+            "name"  =>  $request->nameCourse,
+            "start_date" => date('Y-m-d', $inputDate),
+            "duration" => $request->duration,
+            "user_id" => 1,
+            "topic_id" => $request->Topic,
+        ];
+        $courses = $this->courseRepository->create($reviewData);
+        $this->courseRepository->handleImg($request, $courses->id, 'courseImage');
+
+        return redirect()->route('listCourse.create');
     }
 
     /**

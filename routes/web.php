@@ -30,17 +30,11 @@ Route::get('/historyReport', function () {
 Route::get('/profile', function () {
     return view('pages.trainee.profile');
 })->name('profile');
-Route::get('/detailCourse', function () {
-    return view('pages.trainee.detailCourse');
-})->name('detailCourse');
 Route::get('/detailSubject', function () {
     return view('pages.trainee.detailSubject');
 })->name('detailSubject');
 Route::get('/detailReport', function () {
     return view('pages.trainee.detailReport');
 })->name('detailReport');
-Route::resource('listCourse', CourseController::class)->only([
-    'index', 'show', 'destroy',
-]);
-
+Route::resource('listCourse', CourseController::class);
 Route::get('language/{language}', [LanguageController::class, 'index'])->name('language');
