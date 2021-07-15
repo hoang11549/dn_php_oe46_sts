@@ -38,3 +38,7 @@ Route::get('/detailReport', function () {
 })->name('detailReport');
 Route::resource('listCourse', CourseController::class);
 Route::get('language/{language}', [LanguageController::class, 'index'])->name('language');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

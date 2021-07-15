@@ -15,7 +15,7 @@ class CreateAddUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('role')->default('Trainee');
-            $table->date('age')->nullable();
+            $table->integer('age')->nullable();
             $table->string('address')->nullable();
         });
     }

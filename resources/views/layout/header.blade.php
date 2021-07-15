@@ -26,10 +26,27 @@
                         </a>
                     </form>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">                       
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+
                 <li>
                     <a class="profile-pic" href="#">
-                        <img src="{{ asset('images/users/varun.jpg') }}" alt="user-img" width="36"
-                            class="img-circle"><span class="text-white font-medium">Steave</span></a>
+                        <img src="{{ asset('images/large/2.jpg') }}" alt="user-img" width="36"
+                            class="img-circle"></a>
+                    <input type="button" class="btn btn-dark" value="Logout"
+                        onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"
+                    >
                 </li>
             </ul>
         </div>
