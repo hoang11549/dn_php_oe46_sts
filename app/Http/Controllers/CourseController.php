@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Repository\Topic\TopicRepositoryInterface;
 use App\Repository\Course\CourseRepositoryInterface;
 use App\Repository\Subject\SubjectRepositoryInterface;
-use Carbon\Carbon;
 
 class CourseController extends Controller
 {
@@ -81,8 +80,10 @@ class CourseController extends Controller
         $course = $this->courseRepository->findOrFail($id)->with('topic')->first();
         if ($course) {
             $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id');
+            $imageLink = $course->image->url;
+            $endday = $this->courseRepository->endDay($course->start_date, $course->duration);
 
-            return view('pages.trainee.detailCourse', compact('course', 'arraySubject'));
+            return view('pages.trainee.detailCourse', compact('course', 'arraySubject', 'imageLink', 'endday'));
         }
 
         return back()->withError('notFound');
@@ -143,5 +144,12 @@ class CourseController extends Controller
         }
 
         return redirect()->route('listCourse.index')->withError('notDelete');
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            return $this->courseRepository->search($request, 'name');
+        }
     }
 }

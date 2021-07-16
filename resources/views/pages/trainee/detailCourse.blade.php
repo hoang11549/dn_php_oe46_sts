@@ -3,7 +3,7 @@
 
 <div class="blog-card">
     <div class="meta">
-      <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
+      <div class="photo" style="background-image: url({{ asset($imageLink) }})"></div>
       <ul class="details">
         <li class="author"><a href="#">John Doe</a></li>
         <li class="date">{{ $course->start_date }}</li>
@@ -16,12 +16,14 @@
     </div>
     <div class="description">
       <h1>{{ $course->name }}(Active)</h1>
-      <h2>{{ $course->duration }}</h2>
-      <h2>{{ trans('messages.author') }}:John Doe</h2>
+      <h2>{{ $course->duration }} {{ trans('messages.day') }}</h2>
+      <h2>{{ trans('messages.EndDay') }}: {{ $endday }}</h2>
+      <h2>{{ trans('messages.author') }}: John Doe</h2>
     </div>
   </div>
   <div class="row">
     <!-- .col -->
+   
     <div class="col-md-12 col-lg-8 col-sm-12">
         <div class="white-box">
             <h2>{{ trans('messages.CourseSb') }}</h2>
@@ -35,20 +37,20 @@
                 <div class="row row-1">
             @else    
                 <div class="row row-2">
-        @endif
+            @endif
                 <section>
                 <i class="icon far fa-circle"></i>
                     <div class="details">
-                    <span class="title">{{ $subject->name }}</span>
-                    <span>{{$subject->duration}} {{ trans('messages.day') }}</span>
+                        <span class="title">{{ $subject->name }}</span>
+                        <span>{{$subject->duration}} {{ trans('messages.day') }}</span>
                     </div>
                     <p>{{ $subject->description }}</p>
                     <div class="bottom">
-                    <a href="#">{{ trans('messages.read') }}</a>
+                        <a href="#">{{ trans('messages.read') }}</a>
                     </div>
                 </section>
             </div>
-            @endforeach
+        @endforeach
             <div class="row row-2">
             <section>
                 <i class="icon far fa-check-circle"></i>

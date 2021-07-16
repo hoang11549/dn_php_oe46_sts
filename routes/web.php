@@ -15,6 +15,7 @@ use App\Http\Controllers\CourseController;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -38,7 +39,6 @@ Route::get('/detailReport', function () {
 })->name('detailReport');
 Route::resource('listCourse', CourseController::class);
 Route::get('language/{language}', [LanguageController::class, 'index'])->name('language');
-
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/search', [CourseController::class, 'search'])->name('search');

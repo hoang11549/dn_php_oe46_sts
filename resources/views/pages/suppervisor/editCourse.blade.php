@@ -17,8 +17,8 @@
     <select class="form-control" id="exampleFormControlSelect1" name="Topic">
         @foreach($listTopic as $topic)
             @if($course->topic->id == $topic->id)
-                <option {{$course->topic->id==$topic->id ? 'selected' : '' }}
-            value="{{ $topic->id }}">{{ $topic->name }}</option>
+            <option {{$course->topic->id==$topic->id ? 'selected' : '' }}
+                     value="{{ $topic->id }}">{{ $topic->name }}</option>
             @endif   
         @endforeach
     </select>
