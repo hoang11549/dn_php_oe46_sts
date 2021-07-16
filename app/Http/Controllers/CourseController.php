@@ -154,7 +154,7 @@ class CourseController extends Controller
         return redirect()->route('listCourse.index')->withError('notDelete');
     }
 
-    public  function search(Request $request)
+    public function search(Request $request)
     {
         if ($request->ajax()) {
             return $this->courseRepository->search($request, 'name');

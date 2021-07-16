@@ -37,7 +37,6 @@
                 <div class="row row-1">
             @else    
                 <div class="row row-2">
-<<<<<<< HEAD
             @endif
                 <section>
                 <i class="icon far fa-circle"></i>
@@ -52,22 +51,6 @@
                 </section>
             </div>
         @endforeach
-=======
-        @endif
-                <section>
-                <i class="icon far fa-circle"></i>
-                    <div class="details">
-                    <span class="title">{{ $subject->name }}</span>
-                    <span>{{$subject->duration}} {{ trans('messages.day') }}</span>
-                    </div>
-                    <p>{{ $subject->description }}</p>
-                    <div class="bottom">
-                    <a href="#">{{ trans('messages.read') }}</a>
-                    </div>
-                </section>
-            </div>
-            @endforeach
->>>>>>> Edit Course and show subject
             <div class="row row-2">
             <section>
                 <i class="icon far fa-check-circle"></i>
