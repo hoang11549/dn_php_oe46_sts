@@ -32,6 +32,6 @@ class ReportLesson extends Model
 
     public function comments()
     {
-        return $this->hasMany(CommentReport::class)->whereNull('comment_parent_id');
+        return $this->hasMany(CommentReport::class, 'report_id')->whereNull('comment_parent_id');
     }
 }

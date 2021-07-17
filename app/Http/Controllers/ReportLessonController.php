@@ -25,7 +25,7 @@ class ReportLessonController extends Controller
      */
     public function index()
     {
-        $listReport = $this->reportLessonRepository->getwithfind('status', 0, ['lessons', 'owner'])->get();
+        $listReport = $this->reportLessonRepository->findWhere('status', 0);
 
         return view('pages.suppervisor.listReportLesson', compact('listReport'));
     }
@@ -52,11 +52,11 @@ class ReportLessonController extends Controller
      */
     public function store(Request $request)
     {
-        $authID = Auth::user()->id;
+
         $reportData = [
             "title"  =>  $request->Title,
             "content" => $request->Report,
-            "owner_id" => $authID,
+            "owner_id" => 1,
             "lesson_id" => $request->lessonId,
             "status" => config('training.check.dontCheck'),
         ];

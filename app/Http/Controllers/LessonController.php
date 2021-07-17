@@ -32,16 +32,9 @@ class LessonController extends Controller
 
     public function index()
     {
-        if (Gate::allows('check-role')) {
-            $lesson = $this->lessonRepository->getWith(['subject'])->get();
+        $lesson = $this->lessonRepository->getWith('subject');
 
-            return view('pages.suppervisor.listLesson', compact('lesson'));
-        } else {
-            $arrayHome = [];
-            $arrayHome = $this->trainee->homeTrainee();
-
-            return view('pages.trainee.home', compact('arrayHome'));
-        }
+        return view('pages.suppervisor.listLesson', compact('lesson'));
     }
 
     /**
@@ -93,7 +86,7 @@ class LessonController extends Controller
      */
     public function edit($id)
     {
-        $lesson = $this->lessonRepository->getWith(['subject'])->findOrFail($id);
+        $lesson = $this->lessonRepository->findOrFail($id);
         $subject = $this->subjectRepository->getAll();
 
         return view('pages.suppervisor.editLesson', compact('lesson', 'subject'));

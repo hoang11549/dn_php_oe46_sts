@@ -87,7 +87,7 @@ class SubjectController extends Controller
 
     public function showSub(Request $request)
     {
-        $subject = $this->subjectRepository->getWith('lessons')->findOrFail($request->id);
+        $subject = $this->subjectRepository->findOrFail($request->id);
         $date = $this->subjectRepository->getDay($subject, $request->dateStart);
         $idAuth = Auth::user()->id;
         $listReport = $this->subjectRepository->getNested('lessons', 'lessons.reportLesson')->findOrFail($request->id);

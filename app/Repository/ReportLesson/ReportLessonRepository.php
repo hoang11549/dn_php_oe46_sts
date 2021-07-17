@@ -15,7 +15,7 @@ class ReportLessonRepository extends BaseRepository implements ReportLessonRepos
 
     public function getwithfind($coloum, $para, $table = [])
     {
-        return $this->model::with($table)->where($coloum, $para);
+        return $this->model::with($table)->where($coloum, $para)->get();
     }
 
     public function getwithAuthor($coloum, $para)

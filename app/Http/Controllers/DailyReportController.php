@@ -11,6 +11,7 @@ class DailyReportController extends Controller
 {
     protected $reportDailyRepository;
     protected $courseRepository;
+
     public function __construct(
         CourseRepositoryInterface $courseRepository,
         DailyReportRepositoryInterface $reportDailyRepository
@@ -97,7 +98,7 @@ class DailyReportController extends Controller
      */
     public function show($id)
     {
-        $report = $this->reportDailyRepository->getWith('owner')->findOrFail($id);
+        $report = $this->reportDailyRepository->findOrFail($id);
 
         return view('pages.trainee.detaiReportDaily', compact('report'));
     }
