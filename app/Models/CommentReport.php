@@ -14,11 +14,17 @@ class CommentReport extends Model
     protected $fillable = [
         'report_id',
         'user_id',
+        'content',
         'comment_parent_id',
     ];
 
-    public function commentParent()
+    public function user()
     {
-        return $this->morphTo();
+        return $this->belongsTo(User::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(CommentReport::class, 'comment_parent_id', 'id');
     }
 }

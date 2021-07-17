@@ -70,6 +70,7 @@ return [
     'Image' => 'Image',
     'WriteReport' => 'Write Report',
     'lesson' => 'lesson',
+    'addlesson' => 'Add lesson',
     'Pass' => 'Pass',
     'complete' => 'Complete',
     'uncomplete' => 'unComplete',
@@ -81,4 +82,5 @@ return [
     'status' => 'status',
     'finish' => 'finish',
     'freetime' => 'free time',
+    'description' => 'description',
 ];

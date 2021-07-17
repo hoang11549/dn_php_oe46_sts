@@ -39,10 +39,25 @@
                 </li>
                 @endcan
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('report') }}"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('reportLesson.index')}}"
+                        aria-expanded="false">
+                        <i class="fa fa-columns" aria-hidden="true"></i>
+                        <span class="hide-menu">{{ trans('messages.ListReport') }}</span>
+                    </a>
+                </li>
+                @endcan
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('listSubject.index') }}"
                         aria-expanded="false">
                         <i class="fa fa-table" aria-hidden="true"></i>
-                        <span class="hide-menu">{{ trans('messages.CreateReport') }}</span>
+                        <span class="hide-menu">{{ trans('messages.subject') }}</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('lesson.index') }}"
+                        aria-expanded="false">
+                        <i class="fa fa-table" aria-hidden="true"></i>
+                        <span class="hide-menu">{{ trans('messages.lesson') }}</span>
                     </a>
                 </li>
             {{-- @endif  --}}

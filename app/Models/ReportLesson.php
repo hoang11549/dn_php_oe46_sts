@@ -23,8 +23,14 @@ class ReportLesson extends Model
     {
         return $this->belongsTo(Lesson::class, 'lesson_id', 'id');
     }
+
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id', 'id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(CommentReport::class, 'report_id', 'id');
     }
 }

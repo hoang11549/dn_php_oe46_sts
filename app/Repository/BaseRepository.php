@@ -18,7 +18,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function getAll()
     {
-        return $this->model::oldest()->get();
+        return $this->model::latest()->get();
     }
 
     public function getWith($coloum)
@@ -73,7 +73,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function listPaginate($num)
     {
-        return $this->model->paginate($num);
+        return $this->model::latest()->paginate($num);
     }
 
     public function create($attributes = [])
