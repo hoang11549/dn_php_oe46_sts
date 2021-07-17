@@ -18,11 +18,11 @@ class Course extends Model
         'user_id',
         'topic_id',
     ];
-    protected $with = ['topic'];
+    protected $with = ['topic', 'owner'];
 
     public function topic()
     {
-        return $this->belongsTo(Topic::class);
+        return $this->belongsTo(Topic::class, 'topic_id', 'id');
     }
 
     public function users()
@@ -47,6 +47,6 @@ class Course extends Model
 
     public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
