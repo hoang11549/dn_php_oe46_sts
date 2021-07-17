@@ -23,7 +23,8 @@
             <div class="lesson-preview">
             <h6>{{ trans('messages.lesson') }}</h6>
             <h4>{{ $lesson->name }}</h4>
-            <a href="#">{{ trans('messages.WriteReport') }}<i class="fas fa-chevron-right"></i></a>
+            <a href="{{ route('reportLesson.create', ['id' => $lesson->id]) }}">
+              {{ trans('messages.WriteReport') }}<i class="fas fa-chevron-right"></i></a>
             </div>
             <div class="lesson-info">
                 <h6>{{ $lesson->url_document }}</h6>

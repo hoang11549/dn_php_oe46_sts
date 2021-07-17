@@ -46,4 +46,9 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
 
         return $checkSbj;
     }
+
+    public function getNested($table1, $table2)
+    {
+        return $this->model::with([$table1, $table2]);
+    }
 }

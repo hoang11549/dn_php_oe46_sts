@@ -40,6 +40,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repository\Lesson\LessonRepositoryInterface::class,
             \App\Repository\Lesson\LessonRepository::class,
         );
+        $this->app->singleton(
+            \App\Repository\ReportLesson\ReportLessonRepositoryInterface::class,
+            \App\Repository\ReportLesson\ReportLessonRepository::class,
+        );
     }
 
     /**

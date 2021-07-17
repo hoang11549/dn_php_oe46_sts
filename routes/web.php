@@ -7,7 +7,7 @@ use App\Http\Controllers\CourseTraineeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\HandleUserController;
+use App\Http\Controllers\ReportLessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ Route::get('/report', function () {
     return view('pages.trainee.reportDaily');
 })->name('report');
 Route::get('/historyReport', function () {
-    return view('pages.trainee.historyReport');
+    return view('pages.suppervisor.listReportLesson');
 })->name('historyReport');
 Route::get('/profile', function () {
     return view('pages.trainee.profile');
@@ -35,12 +35,19 @@ Route::get('/detailReport', function () {
 Route::get('/', function () {
     return view('welcome');
 })->name('detailReport')->middleware(['auth']);
-Route::resource('listCourse', CourseController::class);
-Route::resource('listSubject', SubjectController::class);
 Route::get('language/{language}', [LanguageController::class, 'index'])->name('language');
 Auth::routes();
+/* CourseController****** */
+Route::resource('listCourse', CourseController::class);
 Route::get('/search', [CourseController::class, 'search'])->name('search');
-Route::delete('/kick-user/{id}/{courseId}', [CourseController::class, 'kickUser'])->name('kickUser');
 Route::get('/homeTrainee/{id}', [CourseTraineeController::class, 'homeTrainee'])->name('homeTrainee');
-Route::resource('user', UserController::class);
+/**Subject Controller */
+Route::resource('listSubject', SubjectController::class);
 Route::get('/listCourse/detailSubject/{id}/{dateStart}', [SubjectController::class, 'showSub'])->name('showSbj');
+/* Report Lesson Controller*/
+Route::resource('reportLesson', ReportLessonController::class);
+Route::post('report/uploadImg', [ReportLessonController::class, 'uploadImageToDir'])->name('reportLesson.upload');
+Route::get('report/check', [ReportLessonController::class, 'checkPass'])->name('reportLesson.checkPass');
+/* User Controller*/
+Route::resource('user', UserController::class);
+Route::delete('/kick-user/{id}/{courseId}', [CourseController::class, 'kickUser'])->name('kickUser');

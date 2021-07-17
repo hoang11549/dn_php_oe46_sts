@@ -14,7 +14,7 @@ class UpdateStatusColoumTableUserSubject extends Migration
     public function up()
     {
         Schema::table('user_course', function (Blueprint $table) {
-            $table->boolean('status')->default(0)->change();
+            $table->boolean('status')->default(config('training.check.dontCheck'))->change();
         });
     }
 
