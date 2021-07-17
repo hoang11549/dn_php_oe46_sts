@@ -15,17 +15,23 @@ class Report extends Model
         'title',
         'description',
         'problem',
+        'data_time',
         'user_id',
-        'course_id',
+        'course_id'
     ];
-
-    public function user()
+    protected $with = ['owner', 'course'];
+    public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function commentReport()
     {
         return $this->morphMany(CommentReport::class, 'comment_parent');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 }

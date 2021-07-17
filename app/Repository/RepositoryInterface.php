@@ -27,6 +27,7 @@ interface RepositoryInterface
 
     public function findWhere($colum, $para);
 
+
     /**
      * Create
      * @param array $attributes

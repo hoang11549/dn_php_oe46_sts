@@ -50,4 +50,9 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function reportDaily()
+    {
+        return $this->hasMany(Report::class);
+    }
 }

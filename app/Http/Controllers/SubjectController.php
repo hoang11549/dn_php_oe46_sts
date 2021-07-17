@@ -74,6 +74,7 @@ class SubjectController extends Controller
             "description" => $request->description,
         ];
         $subject = $this->subjectRepository->create($Data);
+
         return redirect()->route('listSubject.index');
     }
 
@@ -87,7 +88,7 @@ class SubjectController extends Controller
     public function showSub(Request $request)
     {
         $subject = $this->subjectRepository->getWith('lessons')->findOrFail($request->id);
-        $date = $this->subjectRepository->getDay($subject, $request->startday);
+        $date = $this->subjectRepository->getDay($subject, $request->dateStart);
         $idAuth = Auth::user()->id;
         $listReport = $this->subjectRepository->getNested('lessons', 'lessons.reportLesson')->findOrFail($request->id);
         $checked = [];
@@ -99,15 +100,19 @@ class SubjectController extends Controller
         } else {
             $checkSubject = $this->subjectRepository->checkComplete($checked);
         }
-
         $arrayUser = $this->userRepository->findBeLongMany($subject, 'subject_id', 'users', 'user_id');
-        foreach ($arrayUser as $arr) {
-            if ($checkSubject == config('training.check.pass') && $arr->id != $idAuth) {
-                $subject->users()->attach($idAuth);
+
+        foreach ($listReport->lessons as $arr) {
+            if ($checkSubject == config('training.check.pass')) {
+                foreach ($arr->reportLesson as $ar) {
+                    if ($ar->owner_id == $idAuth) {
+                        $subject->users()->attach($idAuth);
+                    }
+                }
             }
         }
 
-        return view('pages.trainee.detailSubject', compact('subject', 'date', 'checked'));
+        return view('pages.trainee.detailSubject', compact('subject', 'date', 'checked', 'request'));
     }
     public function show($id)
     {
