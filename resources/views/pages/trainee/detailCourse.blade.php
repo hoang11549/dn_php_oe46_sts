@@ -51,22 +51,21 @@
             @else    
                 <div class="row row-2">
             @endif
-                <section>
-                    
-                    @if($check[$key]==true)
-                        <i class="icon far fa-check-circle"></i>  
-                    @else
-                        <i class="icon far fa-circle"></i>
-                    @endif
-                    <div class="details">
-                        <span class="title">{{ $subject->name }}</span>
-                        <span>{{ trans('messages.EndDay') }} {{$date[$key]}} </span>
-                    </div>
-                    <p>{{ $subject->description }}</p>
-                    <div class="bottom">
-                        <a href="{{ route('showSbj', [$subject->id,$date[$key] ]) }}">{{ trans('messages.read') }}</a>
-                    </div>
-                </section>
+                    <section>
+                        @if($check[$key]==true)
+                            <i class="icon far fa-check-circle"></i>  
+                        @else
+                            <i class="icon far fa-circle"></i>
+                        @endif
+                        <div class="details">
+                            <span class="title">{{ $subject->name }}</span>
+                            <span>{{ trans('messages.EndDay') }} {{$date[$key]}} </span>
+                        </div>
+                        <p>{{ $subject->description }}</p>
+                        <div class="bottom">
+                            <a href="{{ route('showSbj', [$subject->id,$date[$key] ]) }}">{{ trans('messages.read') }}</a>
+                        </div>
+                    </section>
                 </div>
         @endforeach
             </div>
@@ -79,60 +78,25 @@
             </div>
             <div class="card-body">
                 <ul class="chatonline">
-                    <li>  
-                        <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                src="{{ asset('images/users/varun.jpg') }}" alt="user-img" class="img-circle">
-                            <div class="ms-2">
-                                <span class="text-dark">Varun Dhavan</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                src="{{ asset('images/users/genu.jpg') }}" alt="user-img" class="img-circle">
-                            <div class="ms-2">
-                                <span class="text-dark">Genelia
-                                    Deshmukh </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                src="{{ asset('images/users/ritesh.jpg') }}" alt="user-img" class="img-circle">
-                            <div class="ms-2">
-                                <span class="text-dark">Ritesh
-                                    Deshmukh </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                src="{{ asset('images/users/arijit.jpg') }}" alt="user-img" class="img-circle">
-                            <div class="ms-2">
-                                <span class="text-dark">Arijit
-                                    Sinh </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>       
-                        <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                src="{{ asset('images/users/govinda.jpg') }}" alt="user-img"
-                                class="img-circle">
-                            <div class="ms-2">
-                                <span class="text-dark">Govinda
-                                    Star</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                src="{{ asset('images/users/hritik.jpg') }}" alt="user-img" class="img-circle">
-                            <div class="ms-2">
-                                <span class="text-dark">John
-                                    Abraham</span>
-                            </div>
-                        </a>
-                    </li>
+                    @foreach ($arrayUser as $arrU)
+                        <li>  
+                            <a href="javascript:void(0)" class="d-flex align-items-center">
+                                <img src="{{ asset( $arrU->image->url) }}" alt="user-img" class="img-circle">
+                                <div class="ms-2">
+                                    <span class="text-dark">{{ $arrU->name }}</span>
+                                </div>
+                                <div class="ms-1">
+                                    <form action="{{ route('kickUser',['id'=>$arrU->id,'courseId'=>$course->id])}}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button type="submit">
+                                            <i class="fas fa-user-minus"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>

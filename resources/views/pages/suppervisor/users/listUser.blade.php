@@ -24,12 +24,16 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->age }}</td>
                                     <td>{{ $user->address }}</td>
-                                    <td><a href="{{ route('user.show', $user->id) }}"><i class="fas fa-edit">
-                                        <button type="button" class="btn btn-info">{{  trans('messages.Detail')  }}</button>
-                                    </i></a></td>
-                                    <td><a href="{{ route('user.edit', $user->id) }}"><i class="fas fa-edit">
-                                        <button type="button" class="btn btn-primary">{{  trans('messages.Edit')  }}</button>
-                                    </i></a></td>
+                                    <td>
+                                        <a href="{{ route('user.show', ['user' => $user->id]) }}">
+                                        <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('user.edit', ['user' => $user->id]) }}">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
                                     <td>
                                         <form action="{{ route('user.destroy', $user->id) }}" method="POST">
                                             @method('delete')
@@ -43,10 +47,12 @@
                             @endif
                         </tbody>
                     </table>
+                    <nav aria-label="Page navigation example">
+                        {!! $users->links() !!}
+                      </nav>
                 </div>
             </div>
         </div>
     </div>  
 </div>
-{{ $users->links() }}
 @endsection
