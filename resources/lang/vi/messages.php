@@ -70,4 +70,6 @@ return [
     'WriteReport' => 'Viết báo cáo',
     'lesson' => 'bai hoc',
     'Pass' => 'đậu',
+    'complete' => 'hoàn thành',
+    'uncomplete' => 'chưa hoàn thành',
 ];

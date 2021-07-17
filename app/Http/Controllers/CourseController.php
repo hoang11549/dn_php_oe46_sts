@@ -121,10 +121,19 @@ class CourseController extends Controller
             $endday = $this->courseRepository->endDay($course->start_date, $course->duration);
             $date = $this->subjectRepository->startDay($arraySubject, $course->start_date);
             $check = $this->subjectRepository->checkdate($arraySubject, $course->start_date);
+            $UserCheckSbj = [];
+            foreach ($arraySubject as $key => $arr) {
+                $User = $this->userRepository->findBeLongMany($arr, 'subject_id', 'users', 'user_id');
+                $CheckSbj = true;
+                if ($User == []) {
+                    $CheckSbj = false;
+                }
+                array_push($UserCheckSbj, $CheckSbj);
+            }
 
             return view(
                 'pages.trainee.detailCourse',
-                compact('course', 'arraySubject', 'imageLink', 'endday', 'date', 'check', 'arrayUser')
+                compact('course', 'arraySubject', 'imageLink', 'endday', 'date', 'check', 'arrayUser', 'UserCheckSbj')
             );
         }
 

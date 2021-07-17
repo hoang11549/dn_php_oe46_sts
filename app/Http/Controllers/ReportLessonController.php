@@ -56,7 +56,7 @@ class ReportLessonController extends Controller
             "content" => $request->Report,
             "owner_id" => $authID,
             "lesson_id" => $request->lessonId,
-            "status" => config('training.check.dontCheck'),
+            "status" => config('traineing.check.dontCheck'),
         ];
         if ($this->reportLessonRepository->create($reportData)) {
             return back()->with("success", trans('messages.review_created'));

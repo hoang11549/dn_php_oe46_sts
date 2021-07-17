@@ -70,4 +70,6 @@ return [
     'WriteReport' => 'Write Report',
     'lesson' => 'lesson',
     'Pass' => 'Pass',
+    'complete' => 'Complete',
+    'uncomplete' => 'unComplete',
 ];

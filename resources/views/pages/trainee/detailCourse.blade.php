@@ -62,6 +62,12 @@
                             <span>{{ trans('messages.EndDay') }} {{$date[$key]}} </span>
                         </div>
                         <p>{{ $subject->description }}</p>
+                        @if( $UserCheckSbj[$key] )
+                        <h3>{{ trans('messages.complete') }}</h3>
+                        @else
+                          <h3>{{ trans('messages.uncomplete') }}</h3>
+                        @endif
+                        
                         <div class="bottom">
                             <a href="{{ route('showSbj', [$subject->id,$date[$key] ]) }}">{{ trans('messages.read') }}</a>
                         </div>

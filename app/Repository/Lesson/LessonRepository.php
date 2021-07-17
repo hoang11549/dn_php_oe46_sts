@@ -11,4 +11,15 @@ class LessonRepository extends BaseRepository implements LessonRepositoryInterfa
     {
         parent::__construct($lesson);
     }
+    public function checkFunction($value, $idAuth)
+    {
+        $pass = config('training.check.dontCheck');
+        foreach ($value->reportLesson as $listReport) {
+            if ($listReport->status == config('training.check.pass') && $listReport->owner_id == $idAuth) {
+                $pass = config('training.check.pass');
+            }
+        }
+
+        return $pass;
+    }
 }

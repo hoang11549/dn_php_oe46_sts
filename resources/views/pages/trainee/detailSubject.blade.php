@@ -18,7 +18,7 @@
 
 <div class="white-box">
     <h1>{{ trans('messages.Lesson') }}</h1>
-    @foreach($subject->lessons as $lesson)
+    @foreach($subject->lessons as $key=> $lesson)
         <div class="lesson">
             <div class="lesson-preview">
             <h6>{{ trans('messages.lesson') }}</h6>
@@ -28,6 +28,11 @@
             </div>
             <div class="lesson-info">
                 <h6>{{ $lesson->url_document }}</h6>
+                @if($checked[$key]==config('training.check.pass'))
+                  <h3>{{ trans('messages.complete') }}</h3>
+                @else
+                  <h3>{{ trans('messages.uncomplete') }}</h3>
+                @endif
             </div>
         </div>  
     @endforeach

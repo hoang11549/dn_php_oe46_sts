@@ -51,4 +51,15 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
     {
         return $this->model::with([$table1, $table2]);
     }
+    public function checkComplete($checked = [])
+    {
+        foreach ($checked as $tick) {
+            $checkSubjec = 1;
+            if ($tick == 0) {
+                $checkSubjec = config('training.check.dontcheck');
+                break;
+            }
+        }
+        return $checkSubjec;
+    }
 }
