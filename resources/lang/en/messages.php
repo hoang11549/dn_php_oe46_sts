@@ -89,4 +89,8 @@ return [
     'trainee' => 'trainee',
     'Supervisor' => 'Supervisor',
     'ReportLesson' => 'báo cáo môn',
+    'Notifications' => 'Notifications',
+    'courseNoti1' => 'You were',
+    'courseNoti2' => ' invited to Course:',
+    'timeAgo' => 'about a minute ago',
 ];
