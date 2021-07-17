@@ -16,6 +16,7 @@ return [
     'Notify' => [
         'courseCreate' => 1,
         'studentfree' => 2,
+        'reportLesson' => 3,
     ],
     'Month' => [
         1 => "Jan",

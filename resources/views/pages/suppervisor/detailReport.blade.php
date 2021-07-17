@@ -16,10 +16,14 @@
  <div class="card-body">
         <h3 class="box-title mb-0">{{ trans('messages.Comments') }}</h3>
     </div>
-        @include('layout.commentDisplay', ['comments' => $report->comments, 'report_id' => $report->id])
+        @include('layout.commentDisplay', 
+        [
+        'comments' => $report->comments,
+         'report_id' => $report->id ,
+         'timeNow'=>$timeNow])
         <hr />
         <h4>{{ trans('messages.AddComment') }}</h4>
-        <form method="post" action="{{ route('comments.store') }}">
+        <form method="post" id="comment" action="{{ route('comments.store') }}">
             @csrf
             <div class="form-group">
                 <textarea class="form-control" name="content"></textarea>

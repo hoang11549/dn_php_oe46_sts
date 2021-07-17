@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ReportLesson;
+use App\Notifications\NotifiCourse;
+use App\Notifications\NotiReportLesson;
 use App\Repository\ReportLesson\ReportLessonRepositoryInterface;
 use App\Repository\Lesson\LessonRepositoryInterface;
+use Carbon\Carbon;
+use Pusher\Pusher;
 
 class ReportLessonController extends Controller
 {
@@ -56,7 +60,7 @@ class ReportLessonController extends Controller
         $reportData = [
             "title"  =>  $request->Title,
             "content" => $request->Report,
-            "owner_id" => 1,
+            "owner_id" => Auth::user()->id,
             "lesson_id" => $request->lessonId,
             "status" => config('training.check.dontCheck'),
         ];
@@ -77,8 +81,9 @@ class ReportLessonController extends Controller
     public function show($id)
     {
         $report = $this->reportLessonRepository->findOrFail($id);
+        $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
 
-        return view('pages/suppervisor/detailReport', compact('report'));
+        return view('pages/suppervisor/detailReport', compact('report', 'timeNow'));
     }
 
     /**
@@ -144,6 +149,26 @@ class ReportLessonController extends Controller
         if ($courses == false) {
             return back()->with("error", trans('messages.error_updated'));
         }
+        $report = $this->reportLessonRepository->findOrFail($request->id);
+        $user = $report->owner;
+        $data = [
+            'nameLesson' => $report->lessons->name,
+            'type' => config('training.Notify.reportLesson'),
+            'Auth' => Auth::user()->name,
+            'userId' => $report->owner->id,
+        ];
+        $user->notify(new NotiReportLesson($data));
+        $options = array(
+            'cluster' => 'ap1',
+            'encrypted' => true
+        );
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+        $pusher->trigger('ReportLessonEvents', 'report-Lesson-check-', $data);
 
         return redirect()->route('reportLesson.index');
     }

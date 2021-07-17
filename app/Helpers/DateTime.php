@@ -43,3 +43,9 @@ function getYear($courseYear)
 
     return $yearArray;
 }
+
+function getNow()
+{
+    $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
+    return $timeNow;
+}

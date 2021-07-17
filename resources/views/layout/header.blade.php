@@ -30,7 +30,8 @@
                                     <div class="media-body">
                                     <strong class="notification-title">{{ trans('messages.TraineeFree') }}  </strong>
                                      <div class="notification-meta">
-                                        <small class="timestamp">about a minute ago</small>
+                                        <small class="timestamp">
+                                            {{ $notification->created_at->diffForHumans(getNow()) }}</small>
                                     </div>
                                     </div>
                                 </div>
@@ -41,10 +42,29 @@
                                   <div class="media-left">
                                   </div>
                                   <div class="media-body">
-                                    <strong class="notification-title">{{ trans('messages.courseNoti1') }} {{ $notification->data['Auth'] }}
+                                    <strong class="notification-title">{{ trans('messages.courseNoti1') }} 
+                                        {{ $notification->data['Auth'] }}
                                         {{ trans('messages.courseNoti2') }} {{ $notification->data['nameCourse'] }}</strong>
                                     <div class="notification-meta">
-                                      <small class="timestamp">{{ trans('messages.timeAgo') }}</small>
+                                      <small class="timestamp">
+                                          {{ $notification->created_at->diffForHumans(getNow()) }}</small>
+                                    </div>
+                                  </div>
+                                </div>
+                            </li>
+                            @elseif($notification->data['type']==config('training.Notify.reportLesson'))
+                            <li class="notification active">
+                                <div class="media">
+                                  <div class="media-left">
+                                  </div>
+                                  <div class="media-body">
+                                    <strong class="notification-title">
+                                        {{ trans('messages.courseNoti1') }}  {{ $notification->data['Auth'] }}
+                                        {{ trans('messages.approved') }} {{ $notification->data['nameLesson'] }}
+                                    </strong>
+                                    <div class="notification-meta">
+                                      <small class="timestamp">
+                                          {{ $notification->created_at->diffForHumans(getNow()) }}</small>
                                     </div>
                                   </div>
                                 </div>

@@ -5,6 +5,13 @@
             <ul id="sidebarnav">
             {{-- @if(Auth::user()->role ===UserRole::SUPPERVISOR) --}}
             @can('check-role')
+            <li class="sidebar-item pt-2">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('DashBoard') }}"
+                    aria-expanded="false">
+                    <i class="fas fa-chart-pie"></i>
+                    <span class="hide-menu">{{ trans('messages.DashBoard') }}</span>
+                </a>
+            </li>
                 <li class="sidebar-item pt-2">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('user.index') }}"
                         aria-expanded="false">

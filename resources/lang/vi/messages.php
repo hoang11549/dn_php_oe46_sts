@@ -95,4 +95,6 @@ return [
     'courseNoti2' => 'đưa vào khóa học:',
     'timeAgo' => '1 phut truoc',
     'TraineeFree' => 'Sinh viên không dính khóa học nào',
+    'DashBoard' => 'Biểu đồ báo cáo',
+    'approved' => 'duyệt bài :',
 ];

@@ -18,7 +18,7 @@ class ReportLesson extends Model
         'owner_id',
         'status',
     ];
-    protected $with = ['comments'];
+    protected $with = ['comments', 'owner', 'lessons'];
 
     public function lessons()
     {

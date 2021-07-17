@@ -13,7 +13,8 @@ var notificationsWrapper   = $('.dropdown-notifications');
         channel.bind("send-message-", function(data) {
             const idAuth = new Number(id);
             for(let i=0; i<data.listUser.length;i++){
-                const idUser = new Number(data.listUser);
+                console.log(data.listUser[i]);
+                const idUser = new Number(data.listUser[i]);
                 if(idAuth-idUser==0){
                     var existingNotifications = notifications.html();
                     var newNotificationHtml = `
@@ -40,14 +41,41 @@ var notificationsWrapper   = $('.dropdown-notifications');
                 }
             }
         });
-        /**send-Trainee-free- */
-        var channelFree = pusher.subscribe('TraineeFreeEvents');
-        var role = $('meta[name="role"]').attr("content");
-        channelFree.bind("send-Trainee-free-", function(data) {
+        /***report-Lesson-check-*/
+        var channelReportLesson= pusher.subscribe('ReportLessonEvents');
+        channelReportLesson.bind("report-Lesson-check-", function(data) {
+            const idAuth = new Number(id);
+                const idUser = new Number(data.userId);
+                if(idAuth-idUser==0){
+                    var existingNotifications = notifications.html();
+                    var newNotificationHtml = `
+                    <li class="notification active">
+                        <div class="media">
+                            <div class="media-left">   
+                            </div>
+                            <div class="media-body">
+                            <strong class="notification-title"> bạn đã được ${data.Auth} 
+                            duyệt bài :${data.nameLesson}  </strong>
+                             
+                            </div>
+                        </div>
+                    </li>
+                    `;
+                    notifications.html(newNotificationHtml + existingNotifications);
+                    notificationsCount += 1;
+                    notificationsCountElem.attr('data-count', notificationsCount);
+                    notificationsWrapper.find('.notif-count').text(notificationsCount);
+                    notificationsWrapper.show();
+            
+                }
+        });
+            /***send-Trainee-free- */
+            var channelFree = pusher.subscribe('TraineeFreeEvents');
+            var role = $('meta[name="role"]').attr("content");
+            channelFree.bind("send-Trainee-free-", function(data) {
                 console.log(data.role);
                 var roleCheck=data.role.toString();
                 console.log(roleCheck.charAt(1)==role.charAt(1));
-                
                 if(roleCheck.charAt(1)==role.charAt(1))
                 {
                     var existingNotifications = notifications.html();

@@ -94,4 +94,6 @@ return [
     'courseNoti2' => ' invited to Course:',
     'timeAgo' => 'about a minute ago',
     'TraineeFree' => 'List Trainee Free',
+    'DashBoard' => 'DashBoard',
+    'approved' => 'approved :',
 ];
