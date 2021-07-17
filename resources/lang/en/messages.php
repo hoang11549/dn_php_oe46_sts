@@ -88,4 +88,5 @@ return [
     'Role' => 'Role',
     'trainee' => 'trainee',
     'Supervisor' => 'Supervisor',
+    'ReportLesson' => 'báo cáo môn',
 ];

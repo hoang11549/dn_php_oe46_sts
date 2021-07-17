@@ -25,11 +25,6 @@ class Report extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function commentReport()
-    {
-        return $this->morphMany(CommentReport::class, 'comment_parent');
-    }
-
     public function course()
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');

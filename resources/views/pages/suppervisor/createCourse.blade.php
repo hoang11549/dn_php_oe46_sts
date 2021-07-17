@@ -78,8 +78,7 @@
             <tr>
                 <th data-field="state" data-checkbox="true"></th>
                 <th data-field="ex" data-filter-control="input" data-sortable="true">{{ trans('messages.Id') }}</th>
-                <th data-field="examen" data-filter-control="select" data-sortable="true">{{ trans('messages.FullName') }}</th>
-                
+                <th data-field="examen" data-filter-control="select" data-sortable="true">{{ trans('messages.FullName') }}</th>  
                 <th data-field="prenom" data-sortable="true">{{ trans('messages.Email') }}</th>
             </tr>
         </thead>
