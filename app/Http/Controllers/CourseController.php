@@ -69,10 +69,13 @@ class CourseController extends Controller
      */
     public function create()
     {
+        $listTopic = $this->topicRepository->getAll();
         $subject = $this->subjectRepository->getAll();
-        $users = $this->userRepository->findWhere('status', config('training.check.dontActive'));
 
-        return view('pages.suppervisor.createCourse', compact('subject', 'users'));
+        $users = $this->userRepository->findWhere('status', config('training.check.dontActive'));
+        $supervisor = $this->userRepository->findWhere('role', 'Supervisor');
+
+        return view('pages.suppervisor.createCourse', compact('subject', 'users', 'listTopic', 'supervisor'));
     }
 
     /**
@@ -83,12 +86,12 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $inputDate = strtotime($request->dateStart);
+        $inputDate = strtotime($request->datetime);
         $reviewData = [
             "name"  =>  $request->nameCourse,
             "start_date" => date('Y-m-d', $inputDate),
             "duration" => $request->duration,
-            "user_id" => 1,
+            "user_id" => config('training.check.active'),
             "topic_id" => $request->topic,
         ];
         $courses = $this->courseRepository->create($reviewData);
@@ -129,18 +132,38 @@ class CourseController extends Controller
             $date = $this->subjectRepository->startDay($arraySubject, $course->start_date);
             $check = $this->subjectRepository->checkdate($arraySubject, $course->start_date);
             $UserCheckSbj = [];
+            $auId = Auth::user()->id;
+            $chekcCourse = true;
+
             foreach ($arraySubject as $key => $arr) {
                 $User = $this->userRepository->findBeLongMany($arr, 'subject_id', 'users', 'user_id');
-                $CheckSbj = true;
-                if ($User == []) {
-                    $CheckSbj = false;
-                }
+                $CheckSbj = userComplete($auId, $User);
                 array_push($UserCheckSbj, $CheckSbj);
+                if ($CheckSbj == false) {
+                    $chekcCourse = false;
+                }
+            }
+            $status = trans('messages.Active');
+            if ($chekcCourse == true && $course->status == config('training.check.finish')) {
+                $status = trans('messages.complete'); //complete course
+            } elseif ($chekcCourse == false && $course->status == config('training.check.finish')) {
+                $status = trans('messages.uncomplete'); //dont complete course
             }
 
             return view(
                 'pages.trainee.detailCourse',
-                compact('course', 'arraySubject', 'imageLink', 'endday', 'date', 'check', 'arrayUser', 'UserCheckSbj')
+                compact(
+                    'course',
+                    'arraySubject',
+                    'imageLink',
+                    'endday',
+                    'date',
+                    'check',
+                    'arrayUser',
+                    'UserCheckSbj',
+                    'status',
+                    'auId',
+                )
             );
         }
 
@@ -216,7 +239,7 @@ class CourseController extends Controller
         if ($course) {
             if ($course->users()->detach($id)) {
                 $update = ["status" => (config('training.check.dontActive')),];
-                $user = $this->userRepository->update($update);
+                $user = $this->userRepository->update($id, $update);
 
                 return redirect()->route('listCourse.show', ['listCourse' => $courseId]);
             }
@@ -225,5 +248,19 @@ class CourseController extends Controller
         }
 
         return back()->withError('notFound');
+    }
+
+    public function finishCourse($id)
+    {
+        $course =  $this->courseRepository->findOrFail($id);
+        $arrayUser = $this->userRepository->findBeLongMany($course, 'course_id', 'users', 'user_id');
+        $Data = ["status" => 1,];
+        foreach ($arrayUser as $arr) {
+            $complete = ["status" => 0,];
+            $arr->id = $this->userRepository->update($arr->id, $complete);
+        }
+        $cousrUpdate = $this->courseRepository->update($id, $Data);
+
+        return redirect()->route('listCourse.index');
     }
 }

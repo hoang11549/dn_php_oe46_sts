@@ -41,6 +41,7 @@ Auth::routes();
 Route::resource('listCourse', CourseController::class);
 Route::get('/search', [CourseController::class, 'search'])->name('search');
 Route::get('/homeTrainee/{id}', [CourseTraineeController::class, 'homeTrainee'])->name('homeTrainee');
+Route::get('/finishCourse/{id}', [CourseController::class, 'finishCourse'])->name('finishCourse');
 /**Subject Controller */
 Route::resource('listSubject', SubjectController::class);
 Route::get('/listCourse/detailSubject/{id}/{dateStart}', [SubjectController::class, 'showSub'])->name('showSbj');

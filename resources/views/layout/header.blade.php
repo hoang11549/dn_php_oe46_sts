@@ -36,9 +36,14 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
+                        
                     </div>
                 </li>
-
+                @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ trans('messages.Register') }}</a>
+                </li>
+            @endif
                 <li>
                     <a class="profile-pic" href="#">
                         {{-- <img class="avatar" src="{{ asset($users->image->url) }}" alt=""> --}}

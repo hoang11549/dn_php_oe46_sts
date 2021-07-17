@@ -72,4 +72,8 @@ return [
     'Pass' => 'đậu',
     'complete' => 'hoàn thành',
     'uncomplete' => 'chưa hoàn thành',
+    'Active' => 'hoạt động',
+    'donthavelesson' => 'không có bài học ',
+    'CourseSb' => 'môn học của khóa',
+    'finishCourse' => 'kết thúc khóa học',
 ];
