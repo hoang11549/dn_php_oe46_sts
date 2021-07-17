@@ -51,4 +51,8 @@ return [
     'author' => 'người tạo',
     'Update' => 'cập nhật',
     'EditCourse' => 'cập nhật khóa học',
+    'duration' => 'duration',
+    'subject' => 'Môn học',
+    'Create-At' => 'Ngày tạo',
+    'Id' => 'ID',
 ];

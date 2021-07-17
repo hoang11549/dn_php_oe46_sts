@@ -26,6 +26,46 @@
         <label for="">{{ trans('messages.duration') }}</label>
         <input type="number" name="duration" class="form-control" id="yourmail" placeholder="enter day">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+        <label for="">{{ trans('messages.subject') }}</label>
+            <ul class="cus-checkbox">
+                <div class='for-disabled'>
+            @foreach ($subject as $subjects)
+                    <li><input type="checkbox" name="subject[]" id="checkbox{{ $subjects->name }}"
+                        value="{{ $subjects->id }}" class="enabled">
+                        <label for="checkbox{{ $subjects->name }}">{{ $subjects->name }}</label>
+                    </li>
+            @endforeach
+                </div>
+            </ul>
+    <table id="table" 
+            data-toggle="table"
+            data-filter-control="true" 
+            data-show-export="true"
+            data-click-to-select="true"
+            data-pagination="true"
+            data-toolbar="#toolbar">
+        <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+                <th data-field="ex" data-filter-control="input" data-sortable="true">{{ trans('messages.Id') }}</th>
+                <th data-field="examen" data-filter-control="select" data-sortable="true">{{ trans('messages.FullName') }}</th>
+                <th data-field="date" data-filter-control="select" data-sortable="true">{{ trans('messages.Create-At') }}</th>
+                <th data-field="prenom" data-sortable="true">{{ trans('messages.Email') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($users as $key => $user)
+                <tr >
+                    <td class="bs-checkbox "><input data-index={{ $user->id }}
+                        value={{ $user->id }} name="user[]" type="checkbox"></td>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->created_at }}</td>
+                    <td>{{ $user->email }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">{{ trans('messages.Submit') }}</button>
 </form>
 @endsection

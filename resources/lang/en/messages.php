@@ -51,4 +51,8 @@ return [
     'author' => 'author',
     'Update' => 'Update',
     'EditCourse' => 'Edit Course',
+    'duration' => 'duration',
+    'subject' => 'Subject',
+    'Create-At' => 'Create-At',
+    'Id' => 'ID',
 ];

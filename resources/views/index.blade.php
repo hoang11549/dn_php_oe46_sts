@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/detailSubject.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/detailReport.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/buttonAdd.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/checkBox.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/tableBootstrap.css') }}">
+    
+    <!--bower-->
+    <link rel="stylesheet" href="{{ asset('bower_components/dist/css/bootstrap.min.css') }}">
     <!--JS-->  
     <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 </head>
@@ -74,8 +79,6 @@
     <script src="{{ asset('/bower_components/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('/bower_components/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('/bower_components/font-awesome/js/all.min.js') }}"></script>
-    
-    
     <!--------------Code by Member------------------->
     <!--Wave Effects -->
     <script src="{{ asset('assets/js/waves.js') }}"></script>
@@ -88,6 +91,7 @@
     <script src="{{ asset('assets/js/valiJquery.js') }}"></script>
     <!--This page JavaScript -->
     <script src="{{ asset('assets/js/pages/dashboards/dashboard1.js') }}"></script>
+    <script src="{{ asset('assets/js/checkBox.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrapTable.js') }}"></script>
 </body>
-
 </html>
