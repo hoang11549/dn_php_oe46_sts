@@ -80,4 +80,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(CommentReport::class, 'user_id', 'id');
     }
+
+    public function scopeIsTrainer($query)
+    {
+        return $query->where('role', 'Supervisor');
+    }
+
+    public function scopeIsTrainee($query)
+    {
+        return $query->where('role', 'Trainee');
+    }
+
+    public function scopeFree($query)
+    {
+        return $query->where('status', 0);
+    }
 }

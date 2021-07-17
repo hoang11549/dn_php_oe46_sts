@@ -93,4 +93,5 @@ return [
     'courseNoti1' => 'You were',
     'courseNoti2' => ' invited to Course:',
     'timeAgo' => 'about a minute ago',
+    'TraineeFree' => 'List Trainee Free',
 ];

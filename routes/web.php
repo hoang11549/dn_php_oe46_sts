@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ReportLessonController;
+use App\Http\Controllers\SendEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,18 +24,6 @@ use App\Http\Controllers\ReportLessonController;
 |
 */
 
-Route::get('/report', function () {
-    return view('pages.trainee.reportDaily');
-})->name('report');
-Route::get('/historyReport', function () {
-    return view('pages.suppervisor.listReportLesson');
-})->name('historyReport');
-Route::get('/profile', function () {
-    return view('pages.trainee.profile');
-})->name('profile');
-Route::get('/detailReport', function () {
-    return view('pages.trainee.detailReport');
-})->name('detailReport');
 Route::get('/', function () {
     return view('welcome');
 })->name('detailReport')->middleware(['auth']);
@@ -64,3 +53,8 @@ Route::resource('reportDaily', DailyReportController::class);
 Route::get('historyReport', [DailyReportController::class, 'historyReport'])->name('historyReport');
 /**Comment Controller */
 Route::resource('comments', CommentReport::class);
+
+/**Test Send Mail */
+Route::get('/send-mail', [SendEmailController::class, 'create'])->name('getSendEmail');
+
+Route::post('/send-mail', [SendEmailController::class, 'sendEmail'])->name('send.email');

@@ -94,4 +94,5 @@ return [
     'courseNoti1' => 'Bạn đã được',
     'courseNoti2' => 'đưa vào khóa học:',
     'timeAgo' => '1 phut truoc',
+    'TraineeFree' => 'Sinh viên không dính khóa học nào',
 ];

@@ -11,10 +11,12 @@
     <meta name="description"
         content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
+    @if(Auth::check())
     <meta name="video" content="{{ Auth::user()->id}} ">
     @can('check-role')
     <meta name="role" content="{{ Auth::user()->role}} ">
     @endcan
+    @endif    
     <link rel="stylesheet" href="{{ asset('assets/css/search.css') }}">
     <link href="{{ asset('assets/css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/flexCard.css') }}" rel="stylesheet">
