@@ -51,4 +51,5 @@ Route::post('report/uploadImg', [ReportLessonController::class, 'uploadImageToDi
 Route::get('report/check', [ReportLessonController::class, 'checkPass'])->name('reportLesson.checkPass');
 /* User Controller*/
 Route::resource('user', UserController::class);
+Route::post('createUser', [UserController::class, 'createUser'])->name('userCreateUser');
 Route::delete('/kick-user/{id}/{courseId}', [CourseController::class, 'kickUser'])->name('kickUser');

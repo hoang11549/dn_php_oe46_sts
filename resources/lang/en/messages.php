@@ -1,6 +1,7 @@
 <?php
 return [
     'YourCourse' => 'Your course',
+    'ListCourse' => 'List course',
     'Profile' => 'Your profile',
     'CreateReport' => 'Create daily report',
     'ListReport' => 'History Your daily Report',
@@ -76,4 +77,8 @@ return [
     'donthavelesson' => 'dont have lesson',
     'CourseSb' => 'Course\' Subject ',
     'finishCourse' => 'finish Course',
+    'Avatar' => 'Avatar',
+    'status' => 'status',
+    'finish' => 'finish',
+    'freetime' => 'free time',
 ];

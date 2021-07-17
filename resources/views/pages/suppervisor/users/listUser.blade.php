@@ -11,27 +11,27 @@
                             <tr>   
                                 <th class="border-top-0">{{ trans('messages.Stt') }}</th>
                                 <th class="border-top-0">{{ trans('messages.NameUser') }}</th>
-                                <th class="border-top-0">{{ trans('messages.Age') }}</th>
+                                <th class="border-top-0">{{ trans('messages.status') }}</th>
                                 <th class="border-top-0">{{ trans('messages.Address') }}</th>
-                                <th class="text-center border-top-0" colspan="3">{{ trans('messages.Process') }}</th>
+                                <th class="border-top-0">{{ trans('messages.read') }}</th>
+                                <th class="border-top-0">{{ trans('messages.delete') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (!empty($users))
                             @foreach ($users as $key => $user)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $user->role }}</td>
                                     <td>{{ $user->name }}</td>
-                                    <td>{{ $user->age }}</td>
+                                    @if($user->status==1)
+                                        <td>{{ trans('messages.Active') }}</td>
+                                    @else
+                                        <td>{{ trans('messages.freetime') }}</td>
+                                    @endif
                                     <td>{{ $user->address }}</td>
                                     <td>
                                         <a href="{{ route('user.show', ['user' => $user->id]) }}">
                                         <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('user.edit', ['user' => $user->id]) }}">
-                                            <i class="fas fa-edit"></i>
                                         </a>
                                     </td>
                                     <td>

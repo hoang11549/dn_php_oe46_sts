@@ -8,6 +8,7 @@ use App\Repository\Lesson\LessonRepositoryInterface;
 use App\Repository\ReportLesson\ReportLessonRepositoryInterface;
 use App\Repository\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -37,7 +38,16 @@ class SubjectController extends Controller
 
     public function index()
     {
-        //
+        if (Gate::allows('check-role')) {
+            $subject = $this->subjectRepository->listPaginate(config('training.paginate_course'));
+
+            return view('pages.suppervisor.listSubject', compact('subject'));
+        } else {
+            $arrayHome = [];
+            $arrayHome = $this->trainee->homeTrainee();
+
+            return view('pages.trainee.home', compact('arrayHome'));
+        }
     }
 
     /**

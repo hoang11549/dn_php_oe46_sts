@@ -1,6 +1,7 @@
 <?php
 return [
     'YourCourse' => 'Khóa học của bạn',
+    'ListCourse' => 'Khóa học',
     'Profile' => 'Thông tin của bạn',
     'CreateReport' => 'Báo cáo hàng ngày',
     'ListReport' => 'Lịch sử báo cáo',
@@ -76,4 +77,8 @@ return [
     'donthavelesson' => 'không có bài học ',
     'CourseSb' => 'môn học của khóa',
     'finishCourse' => 'kết thúc khóa học',
+    'Avatar' => 'ảnh đại diện',
+    'status' => 'trạng thái',
+    'finish' => 'kết thúc',
+    'freetime' => 'rãnh rỗi',
 ];

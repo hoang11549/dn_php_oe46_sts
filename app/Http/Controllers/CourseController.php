@@ -50,6 +50,7 @@ class CourseController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
+
         if (Gate::allows('check-role')) {
             $courses = $this->courseRepository->listPaginate(config('training.paginate_course'));
 
@@ -134,7 +135,6 @@ class CourseController extends Controller
             $UserCheckSbj = [];
             $auId = Auth::user()->id;
             $chekcCourse = true;
-
             foreach ($arraySubject as $key => $arr) {
                 $User = $this->userRepository->findBeLongMany($arr, 'subject_id', 'users', 'user_id');
                 $CheckSbj = userComplete($auId, $User);

@@ -2,9 +2,11 @@
 
 namespace App\Repository\User;
 
+use App\Models\Image;
 use App\Models\User;
 use App\Repository\BaseRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -26,5 +28,16 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
 
         return $find;
+    }
+    public function handleImgAva(Request $request, $UserID, $nameImage)
+    {
+
+        $CoursImg = $request->file($nameImage);
+        $path = 'assets/images/user/';
+        $name = $CoursImg->getClientOriginalName();
+        $storedPath = $CoursImg->move($path, $name);
+        $avatar = User::find($UserID);
+        $avatar->image->url = $path . $name;
+        $update = DB::table('images')->where('id', $avatar->image->id)->update(['url' => $path . $name]);
     }
 }

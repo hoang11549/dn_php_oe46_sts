@@ -16,10 +16,8 @@
     <label for="exampleFormControlSelect1">{{ trans('messages.Topic') }}</label>
     <select class="form-control" id="exampleFormControlSelect1" name="Topic">
         @foreach($listTopic as $topic)
-            @if($course->topic->id == $topic->id)
             <option {{$course->topic->id==$topic->id ? 'selected' : '' }}
-                     value="{{ $topic->id }}">{{ $topic->name }}</option>
-            @endif   
+                     value="{{ $topic->id }}">{{ $topic->name }}</option> 
         @endforeach
     </select>
     </div>

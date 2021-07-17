@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Request\ValidatorUser;
+use App\Http\Requests\RegisterRequest;
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Repository\User\UserRepositoryInterface;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -25,8 +31,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userRepository->paginateUser('role', 'trainee');
-        return view('pages.suppervisor.users.listUser', compact('users'));
+        if (Gate::allows('check-role')) {
+            $users = $this->userRepository->paginateUser('role', 'trainee');
+
+            return view('pages.suppervisor.users.listUser', compact('users'));
+        } else {
+            $arrayHome = [];
+            $arrayHome = $this->trainee->homeTrainee();
+
+            return view('pages.trainee.home', compact('arrayHome'));
+        }
     }
 
     /**
@@ -36,8 +50,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
     }
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\Models\User
+     */
 
     /**
      * Store a newly created resource in storage.
@@ -45,9 +64,8 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $data)
     {
-        //
     }
 
     /**
@@ -58,13 +76,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        try {
-            $user = User::find($id);
+        $user = $this->userRepository->find($id);
 
-            return view('pages.suppervisor.users.detailUser', compact('user'));
-        } catch (Exception $ex) {
-            return redirect()->back()->with('error', $ex->getMessage());
-        }
+        return view('pages.trainee.profile', compact('user'));
     }
 
     /**
@@ -75,14 +89,6 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-
-        try {
-            $user = User::find($id);
-
-            return view('pages.suppervisor.users.editUser', compact('user'));
-        } catch (Exception $ex) {
-            return redirect()->back()->with('error', $ex->getMessage());
-        }
     }
 
     /**
@@ -94,21 +100,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->age = $request->age;
-        $user->address = $request->address;
-        $user->email = $request->email;
-        $user->role = $request->role;
-        DB::beginTransaction();
-        try {
-            $user->save();
-            DB::commit();
-            return redirect()->route('user.index');
-        } catch (Exception $ex) {
-            DB::rollback();
-            return redirect()->back()->with('error', $ex->getMessage());
+        $user = $this->userRepository->findOrFail($id);
+        $editData =
+            [
+                "name" => $request->name,
+                "age" => $request->age,
+                "address" => $request->address,
+            ];
+        $courses = $this->userRepository->update($id, $editData);
+        if ($request->has('avatar')) {
+            $updateImage = $this->userRepository->handleImgAva($request, $id, 'avatar');
         }
+
+        return redirect()->route('user.show', ['user' => $id]);
     }
 
     /**
@@ -119,15 +123,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        DB::beginTransaction();
-        try {
-            $user->delete();
-            DB::commit();
+        if ($this->userRepository->delete($id)) {
             return redirect()->route('user.index');
-        } catch (Exception $ex) {
-            DB::rollback();
-            return redirect()->back()->with('error', $ex->getMessage());
         }
+
+        return back()->withError('notDelete');
     }
 }
