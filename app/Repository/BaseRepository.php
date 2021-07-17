@@ -18,7 +18,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function getAll()
     {
-        return $this->model->all();
+        return $this->model::oldest()->get();
     }
 
     public function getWith($coloum)
@@ -48,7 +48,7 @@ abstract class BaseRepository implements RepositoryInterface
     public function findOrFail($id)
     {
         try {
-            $find = $this->model->findOrFail($id);
+            $find = $this->model::oldest()->findOrFail($id);
         } catch (ModelNotFoundException $exception) {
             Log::debug("Id not found");
 
@@ -61,7 +61,7 @@ abstract class BaseRepository implements RepositoryInterface
     public function findWhere($colum, $para)
     {
         try {
-            $find = $this->model->where($colum, $para)->get();
+            $find = $this->model::oldest()->where($colum, $para)->get();
         } catch (ModelNotFoundException $exception) {
             Log::debug("Id not found");
 

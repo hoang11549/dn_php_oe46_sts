@@ -6,7 +6,6 @@
             <div class="white-box">
                 <h3 class="box-title">{{ trans('messages.Daily') }}</h3>
             </div>
-
         </div>
     </div> 
     <div class="row">

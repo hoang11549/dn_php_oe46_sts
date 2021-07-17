@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repository\Course\CourseRepositoryInterface;
 use App\Repository\User\UserRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CourseTraineeController extends Controller
@@ -20,14 +21,13 @@ class CourseTraineeController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function homeTrainee($id)
+    public function homeTrainee()
     {
-        $user = $this->userRepository->findOrFail($id);
-        $arrayCourse = $this->courseRepository->findBeLongMany($user, 'user_id', 'courses', 'course_id');
+        $arrayCourse = $this->courseRepository->findBeLongMany(Auth::user(), 'user_id', 'courses', 'course_id');
         $arrayLink = [];
         $arrayHome = [];
         foreach ($arrayCourse as $key => $value) {
-            $arrayLink['urlImg'] = $arrayCourse[$key]->image->url;
+            $arrayLink['urlImg'] = $value->image->url;
             $course = $value->with('owner')->first();
             $arrayLink['nameOwner'] = $course->owner->name;
             $arrayLink['nameCourse'] = $value->name;
@@ -35,6 +35,6 @@ class CourseTraineeController extends Controller
             array_push($arrayHome, $arrayLink);
         }
 
-        return  $arrayHome = [];
+        return  $arrayHome;
     }
 }

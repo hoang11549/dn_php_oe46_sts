@@ -5,6 +5,7 @@ namespace App\Repository\User;
 use App\Models\User;
 use App\Repository\BaseRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
@@ -13,10 +14,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         parent::__construct($user);
     }
+
     public function paginateUser($colum, $para)
     {
         try {
-            $find = $this->model->where($colum, $para)->paginate(3);
+            $find = $this->model->where($colum, $para)->paginate(config('training.paginate_course'));
         } catch (ModelNotFoundException $exception) {
             Log::debug("Id not found");
 
