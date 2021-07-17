@@ -67,4 +67,5 @@ return [
     'Update' => 'Cập nhật người dùng',
     'Save' => 'Lưu',
     'Image' => 'Ảnh',
+    'WriteReport' => 'Viết báo cáo',
 ];

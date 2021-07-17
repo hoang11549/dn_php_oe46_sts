@@ -16,6 +16,7 @@ class Subject extends Model
         'duration',
         'description',
     ];
+    protected $with = ['lessons'];
 
     public function lessons()
     {

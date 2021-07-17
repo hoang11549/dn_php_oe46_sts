@@ -67,4 +67,5 @@ return [
     'Update' => 'Update',
     'Save' => 'Save',
     'Image' => 'Image',
+    'WriteReport' => 'Write Report',
 ];
