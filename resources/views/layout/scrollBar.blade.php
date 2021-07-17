@@ -7,6 +7,7 @@
                 use App\Enums\UserRole;
             @endphp
             {{-- @if(Auth::user()->role ===UserRole::SUPPERVISOR) --}}
+            @can('check-role')
                 <li class="sidebar-item pt-2">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('user.index') }}"
                         aria-expanded="false">
@@ -14,6 +15,7 @@
                         <span class="hide-menu">{{ trans('messages.User') }}</span>
                     </a>
                 </li>
+            @endcan
                 <li class="sidebar-item pt-2">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('listCourse.index') }}"
                         aria-expanded="false">
@@ -34,18 +36,9 @@
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('reportLesson.index')}}"
                         aria-expanded="false">
                         <i class="fa fa-columns" aria-hidden="true"></i>
-                        <span class="hide-menu">{{ trans('messages.ListReport') }}</span>
+                        <span class="hide-menu">{{ trans('messages.ReportLesson') }}</span>
                     </a>
                 </li>
-                @endcan
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('reportLesson.index')}}"
-                        aria-expanded="false">
-                        <i class="fa fa-columns" aria-hidden="true"></i>
-                        <span class="hide-menu">{{ trans('messages.ListReport') }}</span>
-                    </a>
-                </li>
-                @endcan
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('listSubject.index') }}"
                         aria-expanded="false">
@@ -58,6 +51,14 @@
                         aria-expanded="false">
                         <i class="fa fa-table" aria-hidden="true"></i>
                         <span class="hide-menu">{{ trans('messages.lesson') }}</span>
+                    </a>
+                </li>
+                @endcan
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('report') }}"
+                        aria-expanded="false">
+                        <i class="fa fa-table" aria-hidden="true"></i>
+                        <span class="hide-menu">{{ trans('messages.CreateReport') }}</span>
                     </a>
                 </li>
             {{-- @endif  --}}

@@ -57,7 +57,7 @@
             <!-- Container fluid  -->
      @yield('content')
             <!-- End Container fluid  -->
-            <script src="{{ asset('assets/js/ajaxSearchCourse.js') }}"></script>
+
             <!-- footer -->
      
             <footer class="footer text-center"> 2021 © Sun* System 
@@ -97,6 +97,7 @@
     <script src="{{ asset('assets/js/checkBox.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrapTable.js') }}"></script>
     <!--search-->
- 
+    <script src="{{ asset('assets/js/ajax-search-user.js') }}"></script>
+    <script src="{{ asset('assets/js/ajaxSearchCourse.js') }}"></script>
 </body>
 </html>

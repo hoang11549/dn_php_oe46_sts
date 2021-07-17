@@ -40,4 +40,36 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         $avatar->image->url = $path . $name;
         $update = DB::table('images')->where('id', $avatar->image->id)->update(['url' => $path . $name]);
     }
+    public function search($request, $coloum)
+    {
+        $output = '';
+        $users = DB::table('users')->where($coloum, 'LIKE', '%' . $request->search . '%')->get();
+        if ($users) {
+            foreach ($users as $key => $user) {
+                if ($user->status == config('training.check.active')) {
+                    $status = 'Active';
+                } else {
+                    $status = 'freetime';
+                }
+                $output .= '<tr>
+                    <td>' . $user->role . '</td>
+                    <td>' . $user->name . '</td>
+                    <td>' . $status . '</td>' .
+                    '<td><a href="user/' . $user->id . '" ><i class="fas fa-eye"></i></a></td>
+                    <td>
+                        <form action="user/' . $user->id . '"
+                            method=POST>
+                                ' . csrf_field() . '
+                    ' . method_field('DELETE') . ' 
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                        </form>
+                    </td>
+                    </tr>';
+            }
+        }
+
+        return Response($output);
+    }
 }

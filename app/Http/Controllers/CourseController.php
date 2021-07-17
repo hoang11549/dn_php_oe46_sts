@@ -253,9 +253,9 @@ class CourseController extends Controller
     {
         $course =  $this->courseRepository->findOrFail($id);
         $arrayUser = $this->userRepository->findBeLongMany($course, 'course_id', 'users', 'user_id');
-        $Data = ["status" => 1,];
+        $Data = ["status" => config('training.check.finish'),];
         foreach ($arrayUser as $arr) {
-            $complete = ["status" => 0,];
+            $complete = ["status" => config('training.check.dontActive'),];
             $arr->id = $this->userRepository->update($arr->id, $complete);
         }
         $cousrUpdate = $this->courseRepository->update($id, $Data);

@@ -1,9 +1,9 @@
-
 $('#search').on('keyup',function(){
     $value = $(this).val();
+    routeSearch =$('.routeSearch').val();
     $.ajax({
         type: 'get',
-        url: "{{ Route('searchUser') }}",
+        url:routeSearch,
         data: {
             'search': $value
         },
