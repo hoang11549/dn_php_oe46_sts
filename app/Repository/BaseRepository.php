@@ -28,12 +28,12 @@ abstract class BaseRepository implements RepositoryInterface
         return $result;
     }
 
-    public function findBeLongMany($arrayCh, $coloum)
+    public function findBeLongMany($arrayCh, $coloum, $tableChoose, $id)
     {
         $arraySubject = [];
-        foreach ($arrayCh->subjects as $i => $course_subject) {
+        foreach ($arrayCh->$tableChoose as $i => $course_subject) {
             $subject = $course_subject->pivot->where($coloum, $arrayCh->id)->get();
-            $listSubject = $this->findOrFail($subject[$i]->subject_id);
+            $listSubject = $this->findOrFail($subject[$i]->$id);
             array_push($arraySubject, $listSubject);
         }
 
@@ -56,7 +56,7 @@ abstract class BaseRepository implements RepositoryInterface
     public function findWhere($colum, $para)
     {
         try {
-            $find = $this->model->where($colum, $para);
+            $find = $this->model->where($colum, $para)->get();
         } catch (ModelNotFoundException $exception) {
             Log::debug("Id not found");
 
