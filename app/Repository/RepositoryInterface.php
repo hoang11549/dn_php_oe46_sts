@@ -19,9 +19,12 @@ interface RepositoryInterface
 
     public function findOrFail($id);
 
-    public function findBeLongMany($course, $coloum);
+    public function findBeLongMany($arrayCh, $coloum, $tableChoose, $id);
 
     public function listPaginate($num);
+
+    public function findWhere($colum, $para);
+
     /**
      * Create
      * @param array $attributes

@@ -18,12 +18,12 @@ class ImageSeeder extends Seeder
             [
                 'imgable_type' => 'course',
                 'url' => 'images/users/varun.jpg',
-                'imgable_id' => '1',
+                'imgable_id' => '8',
             ],
             [
                 'imgable_type' => 'course',
                 'url' => 'images/users/varun.jpg',
-                'imgable_id' => '2',
+                'imgable_id' => '15',
             ],
         );
     }

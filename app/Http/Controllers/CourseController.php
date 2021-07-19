@@ -7,21 +7,25 @@ use Illuminate\Http\Request;
 use App\Repository\Topic\TopicRepositoryInterface;
 use App\Repository\Course\CourseRepositoryInterface;
 use App\Repository\Subject\SubjectRepositoryInterface;
+use App\Repository\User\UserRepositoryInterface;
 
 class CourseController extends Controller
 {
     protected $courseRepository;
     protected $subjectRepository;
     protected $topicRepository;
+    protected $userRepository;
 
     public function __construct(
         CourseRepositoryInterface $courseRepository,
         SubjectRepositoryInterface $subjectRepository,
-        TopicRepositoryInterface $topicRepository
+        TopicRepositoryInterface $topicRepository,
+        UserRepositoryInterface $userRepository
     ) {
         $this->courseRepository = $courseRepository;
         $this->subjectRepository = $subjectRepository;
         $this->topicRepository = $topicRepository;
+        $this->userRepository = $userRepository;
     }
 
 
@@ -44,7 +48,10 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('pages.suppervisor.createCourse');
+        $subject = $this->subjectRepository->getAll();
+        $users = $this->userRepository->findWhere('role', 'Supervisor');
+
+        return view('pages.suppervisor.createCourse', compact('subject', 'users'));
     }
 
     /**
@@ -64,6 +71,16 @@ class CourseController extends Controller
             "topic_id" => $request->topic,
         ];
         $courses = $this->courseRepository->create($reviewData);
+        $course =  $this->courseRepository->find($courses->id);
+        $listSubject = $request->subject;
+        foreach ($listSubject as $list) {
+            $course->subjects()->attach($list);
+        }
+        $listUser = $request->user;
+        foreach ($listUser as $list) {
+            $course->users()->attach($list);
+        }
+
         $this->courseRepository->handleImg($request, $courses->id, 'courseImage');
 
         return redirect()->route('listCourse.create');
@@ -79,7 +96,7 @@ class CourseController extends Controller
     {
         $course = $this->courseRepository->findOrFail($id)->with('topic')->first();
         if ($course) {
-            $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id');
+            $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id', 'subjects', 'subject_id');
             $imageLink = $course->image->url;
             $endday = $this->courseRepository->endDay($course->start_date, $course->duration);
 
@@ -100,7 +117,7 @@ class CourseController extends Controller
         $course = $this->courseRepository->findOrFail($id)->with('topic')->first();
         $listTopic = $this->topicRepository->getAll();
         if ($course) {
-            $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id');
+            $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id', 'subjects', 'subject_id');
 
             return view('pages.suppervisor.editCourse', compact('course', 'arraySubject', 'listTopic'));
         }
