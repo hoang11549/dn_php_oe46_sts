@@ -8,6 +8,7 @@ use App\Repository\Topic\TopicRepositoryInterface;
 use App\Repository\Course\CourseRepositoryInterface;
 use App\Repository\Subject\SubjectRepositoryInterface;
 use App\Repository\User\UserRepositoryInterface;
+use Carbon\Carbon;
 
 class CourseController extends Controller
 {
@@ -92,15 +93,21 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
-        $course = $this->courseRepository->getWith('topic')->findOrFail($id);
+        $course = $this->courseRepository->getWith(['topic', 'owner'])->findOrFail($id);
         if ($course) {
             $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id', 'subjects', 'subject_id');
             $imageLink = $course->image->url;
             $endday = $this->courseRepository->endDay($course->start_date, $course->duration);
+            $date = $this->subjectRepository->startDay($arraySubject, $course->start_date);
+            $check = $this->subjectRepository->checkdate($arraySubject, $course->start_date);
 
-            return view('pages.trainee.detailCourse', compact('course', 'arraySubject', 'imageLink', 'endday'));
+            return view(
+                'pages.trainee.detailCourse',
+                compact('course', 'arraySubject', 'imageLink', 'endday', 'date', 'check')
+            );
         }
 
         return back()->withError('notFound');

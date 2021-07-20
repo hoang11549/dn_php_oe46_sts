@@ -43,6 +43,14 @@
     z-index: -1;
     transform: rotate(45deg);
 }
+.row-x {
+    background: #fff;
+    border-radius: 5px;
+    width: calc(50% - 40px);
+    padding: 20px;
+    position: relative;
+}
+
 .row-1 section::before {
     right: -7px;
 }
@@ -50,7 +58,8 @@
     left: -7px;
 }
 .center-line .scroll-icon,
-.row section .icon {
+.row section .icon,
+.row-x .icon {
     position: absolute;
     background: #f2f2f2;
     height: 40px;
@@ -69,7 +78,8 @@
     font-size: 25px;
     transform: translateX(-50%);
 }
-.row-1 section .icon {
+.row-1 section .icon,
+.row-x .icon {
     top: 15px;
     right: -60px;
 }

@@ -36,6 +36,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repository\User\UserRepositoryInterface::class,
             \App\Repository\User\UserRepository::class,
         );
+        $this->app->singleton(
+            \App\Repository\Lesson\LessonRepositoryInterface::class,
+            \App\Repository\Lesson\LessonRepository::class,
+        );
     }
 
     /**
@@ -47,9 +51,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Relation::morphMap([
             'course' => Course::class,
-
-            'user' => User::class,
-
+            'users' => User::class,
         ]);
         Paginator::useBootstrap();
     }
