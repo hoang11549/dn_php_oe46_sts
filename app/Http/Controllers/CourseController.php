@@ -94,7 +94,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $course = $this->courseRepository->findOrFail($id)->with('topic')->first();
+        $course = $this->courseRepository->getWith('topic')->findOrFail($id);
         if ($course) {
             $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id', 'subjects', 'subject_id');
             $imageLink = $course->image->url;
@@ -114,7 +114,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $course = $this->courseRepository->findOrFail($id)->with('topic')->first();
+        $course = $this->courseRepository->getWith('topic')->findOrFail($id);
         $listTopic = $this->topicRepository->getAll();
         if ($course) {
             $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id', 'subjects', 'subject_id');

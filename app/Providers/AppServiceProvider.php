@@ -47,7 +47,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Relation::morphMap([
             'course' => Course::class,
+
             'user' => User::class,
+
         ]);
         Paginator::useBootstrap();
     }

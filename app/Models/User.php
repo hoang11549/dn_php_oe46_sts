@@ -16,6 +16,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
@@ -59,13 +61,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Course::class, 'user_course', 'user_id', 'course_id');
     }
 
+    public function course()
+    {
+        return $this->hasMany(Course::class);
+    }
+
     public function image()
     {
         return $this->morphOne(Image::class, 'imgable');
-    }
-
-    public function ownerCourse()
-    {
-        return $this->hasMany(Course::class);
     }
 }

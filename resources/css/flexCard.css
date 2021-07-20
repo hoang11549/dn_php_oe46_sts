@@ -50,3 +50,7 @@ h3 {
     text-align: center;
     text-decoration: none;
 }
+.card-content a {
+    text-decoration: none;
+    color: rgb(20, 20, 20);
+}

@@ -21,6 +21,11 @@ abstract class BaseRepository implements RepositoryInterface
         return $this->model->all();
     }
 
+    public function getWith($coloum)
+    {
+        return $this->model::with($coloum);
+    }
+
     public function find($id)
     {
         $result = $this->model->find($id);
@@ -28,12 +33,12 @@ abstract class BaseRepository implements RepositoryInterface
         return $result;
     }
 
-    public function findBeLongMany($arrayCh, $coloum, $tableChoose, $id)
+    public function findBeLongMany($arrayCh, $coloum, $nameTable, $idTable)
     {
         $arraySubject = [];
-        foreach ($arrayCh->$tableChoose as $i => $course_subject) {
+        foreach ($arrayCh->$nameTable as $i => $course_subject) {
             $subject = $course_subject->pivot->where($coloum, $arrayCh->id)->get();
-            $listSubject = $this->findOrFail($subject[$i]->$id);
+            $listSubject = $this->findOrFail($subject[$i]->$idTable);
             array_push($arraySubject, $listSubject);
         }
 

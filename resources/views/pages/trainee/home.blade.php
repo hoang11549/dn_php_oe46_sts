@@ -9,75 +9,31 @@
             <div class="white-box">
                 <div class="d-md-flex mb-3">
                     <h3 class="box-title mb-0"> {{ trans('messages.YourCourse') }}</h3>
-                 
                 </div>
-                <div class="table-responsive">
-                    <div class="list-course">
-                    <ul class="flex-card-list">
-                        <li>
-                          <div class="flex-card">
-                            <div class="card-img"><img src="{{ asset('images/large/2.jpg') }}"></div>
-                            <div class="card-content">
-                              <h3>First</h3>
-                              <div class="text">
-                                <p>I'm a card and I'm first.</p>
+                    <div class="table-responsive">
+                        <div class="list-course">
+                          <ul class="flex-card-list">
+                            @foreach($arrayHome as $key => $arrHome)
+                            <li>
+                              <div class="flex-card">
+                                <div class="card-img">
+                                  <a href="{{ route('listCourse.show',$arrHome['id']) }}">
+                                    <img src="{{ asset($arrHome['urlImg'])}}">
+                                  </a>
+                                </div>
+                                <div class="card-content">
+                                  <a href="{{ route('listCourse.show',$arrHome['id']) }}">
+                                    <h3>{{ $arrHome['nameCourse'] }}</h3>
+                                    <div class="text">
+                                    <p>{{ $arrHome['nameOwner'] }}</p>
+                                    </div>
+                                  </a>
+                                </div>
                               </div>
-                               
-                            </div>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="flex-card">
-                            <div class="card-img"><img src="{{ asset('images/large/3.jpg') }}"></div>
-                            <div class="card-content">
-                              <h3>First</h3>
-                              <div class="text">
-                                <p>I'm a card and I'm second.</p>
-                                <p>I'm some extra content put here to make life more difficult, because I can.</p>
-                              </div>
-                               
-                            </div>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="flex-card">
-                            <div class="card-img"><img src="{{ asset('images/large/4.jpg') }}"></div>
-                            <div class="card-content">
-                              <h3>First</h3>
-                              <div class="text">
-                                <p>I'm a card and I'm second.</p>
-                              </div>
-                               
-                            </div>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="flex-card">
-                            <div class="card-img"><img src="{{ asset('images/large/7.jpg') }}"></div>
-                            <div class="card-content">
-                              <h3>First</h3>
-                              <div class="text">
-                                <p>Dreamcatcher PBR iPhone seitan viral, DIY Truffaut biodiesel slow-carb. Health goth twee migas,.</p>
-                              </div>
-                               
-                            </div>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="flex-card">
-                            <div class="card-img"><img src="{{ asset('images/large/6.jpg') }}"></div>
-                            <div class="card-content">
-                              <h3>First</h3>
-                              <div class="text">
-                                <p>Shabby chic put a bird on it normcore, irony Shoreditch street art hella p</p>
-                              </div>
-                               
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                     
-                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                  </div>
            
                 <nav aria-label="...">
                     <ul class="pagination">

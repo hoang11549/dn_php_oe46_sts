@@ -19,7 +19,9 @@ interface RepositoryInterface
 
     public function findOrFail($id);
 
-    public function findBeLongMany($arrayCh, $coloum, $tableChoose, $id);
+    public function getWith($coloum);
+
+    public function findBeLongMany($arrayCh, $coloum, $nameTable, $idTable);
 
     public function listPaginate($num);
 
