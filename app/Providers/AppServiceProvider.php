@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Course;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             \App\Repository\Topic\TopicRepositoryInterface::class,
             \App\Repository\Topic\TopicRepository::class,
+            \App\Repository\Course\UserRepositoryInterface::class,
+            \App\Repository\Course\UserRepository::class
         );
         $this->app->singleton(
             \App\Repository\User\UserRepositoryInterface::class,
@@ -44,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Relation::morphMap([
             'course' => Course::class,
+            'user' => User::class,
         ]);
         Paginator::useBootstrap();
     }
