@@ -14,6 +14,21 @@ const mix = require('laravel-mix');
  mix.js('resources/js/app.js', 'public/js')
  .sass('resources/sass/app.scss', 'public/css')
  .sourceMaps();
+mix.js('resources/js/app.js', 'public/js')
+    .react()
+    .postCss('resources/css/app.css', 'public/css', [
+        require('postcss-import'),
+        require('tailwindcss'),
+        require('autoprefixer'),
+    ])
+    .webpackConfig(require('./webpack.config'));
+
+if (mix.inProduction()) {
+    mix.version();
+}
+
+    mix.sass('resources/sass/app.scss', 'public/css')
+    .sourceMaps();
 /**--------------CSS--------*/
 mix.styles('resources/css/style.css','public/assets/css/style.css')
 mix.styles('resources/css/style.min.css','public/assets/css/style.min.css')
@@ -26,6 +41,7 @@ mix.styles('resources/css/detailReport.css','public/assets/css/detailReport.css'
 mix.styles('resources/css/buttonAdd.css','public/assets/css/buttonAdd.css')
 mix.styles('resources/css/checkBox.css','public/assets/css/checkBox.css')
 mix.styles('resources/css/tableBootstrap.css','public/assets/css/tableBootstrap.css')
+mix.styles('resources/css/mystyle.css','public/assets/css/mystyle.css')
 /*---------------js----------*/
 mix.js('resources/js/app-style-switcher.js','public/assets/js/app-style-switcher.js')
 mix.js('resources/js/bootstrap.js','public/assets/js/bootstrap.js')

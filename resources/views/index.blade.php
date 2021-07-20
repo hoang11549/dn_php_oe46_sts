@@ -24,6 +24,7 @@
     
     <!--bower-->
     <link rel="stylesheet" href="{{ asset('bower_components/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/mystyle.css') }}">
     <!--JS-->  
     <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 </head>

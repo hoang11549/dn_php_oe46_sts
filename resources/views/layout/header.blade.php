@@ -3,7 +3,7 @@
         <div class="navbar-header" data-logobg="skin6">
             <a class="navbar-brand" href="dashboard.html">
                 <b class="logo-text">
-                    <img src="{{ asset('images/large/sunLogo.png') }}" alt="homepage" />
+                    <img src="{{ asset('images/users/sunLogo.png') }}" alt="homepage" />
                 </b>
                
             </a>
@@ -41,8 +41,7 @@
 
                 <li>
                     <a class="profile-pic" href="#">
-                        <img src="{{ asset('images/large/2.jpg') }}" alt="user-img" width="36"
-                            class="img-circle"></a>
+                        {{-- <img class="avatar" src="{{ asset($users->image->url) }}" alt=""> --}}
                     <input type="button" class="btn btn-dark" value="Logout"
                         onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();"

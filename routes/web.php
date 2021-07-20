@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseTraineeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -17,10 +18,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/home', function () {
     return view('pages.trainee.home');
 })->name('home');
@@ -45,3 +42,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/search', [CourseController::class, 'search'])->name('search');
 Route::get('/homeTrainee/{id}', [CourseTraineeController::class, 'homeTrainee'])->name('homeTrainee');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('user', UserController::class);
