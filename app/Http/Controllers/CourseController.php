@@ -10,7 +10,6 @@ use App\Repository\Subject\SubjectRepositoryInterface;
 use App\Repository\User\UserRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Controllers\CourseTraineeController;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
@@ -115,6 +114,7 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = $this->courseRepository->getWith(['topic', 'owner'])->findOrFail($id);
+        $arrayUser = $this->userRepository->findBeLongMany($course, 'course_id', 'users', 'user_id');
         if ($course) {
             $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id', 'subjects', 'subject_id');
             $imageLink = $course->image->url;
@@ -124,7 +124,7 @@ class CourseController extends Controller
 
             return view(
                 'pages.trainee.detailCourse',
-                compact('course', 'arraySubject', 'imageLink', 'endday', 'date', 'check')
+                compact('course', 'arraySubject', 'imageLink', 'endday', 'date', 'check', 'arrayUser')
             );
         }
 
@@ -185,7 +185,7 @@ class CourseController extends Controller
             return redirect()->route('listCourse.index');
         }
 
-        return redirect()->route('listCourse.index')->withError('notDelete');
+        return back()->withError('notDelete');
     }
 
     public function search(Request $request)
@@ -193,5 +193,18 @@ class CourseController extends Controller
         if ($request->ajax()) {
             return $this->courseRepository->search($request, 'name');
         }
+    }
+    public function kickUser($id, $courseId)
+    {
+        $course =  $this->courseRepository->findOrFail($courseId);
+        if ($course) {
+            if ($course->users()->detach($id)) {
+                return redirect()->route('listCourse.show', ['listCourse' => $courseId]);
+            }
+
+            return back()->withError('notFound');
+        }
+
+        return back()->withError('notFound');
     }
 }

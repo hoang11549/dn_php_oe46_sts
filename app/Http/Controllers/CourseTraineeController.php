@@ -27,7 +27,6 @@ class CourseTraineeController extends Controller
         $arrayLink = [];
         $arrayHome = [];
         foreach ($arrayCourse as $key => $value) {
-            $imageLink = $arrayCourse[$key]->image;
             $arrayLink['urlImg'] = $arrayCourse[$key]->image->url;
             $course = $value->with('owner')->first();
             $arrayLink['nameOwner'] = $course->owner->name;

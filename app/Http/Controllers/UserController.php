@@ -6,11 +6,18 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use App\Repository\User\UserRepositoryInterface;
 
 class UserController extends Controller
 {
+    protected $userRepository;
 
-    
+    public function __construct(
+        UserRepositoryInterface $userRepository
+    ) {
+        $this->userRepository = $userRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(config('app.paginate_num'));
+        $users = $this->userRepository->paginateUser('role', 'trainee');
         return view('pages.suppervisor.users.listUser', compact('users'));
     }
 
@@ -71,7 +78,7 @@ class UserController extends Controller
 
         try {
             $user = User::find($id);
-            
+
             return view('pages.suppervisor.users.editUser', compact('user'));
         } catch (Exception $ex) {
             return redirect()->back()->with('error', $ex->getMessage());
