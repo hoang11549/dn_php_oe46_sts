@@ -36,6 +36,6 @@ class CourseTraineeController extends Controller
             array_push($arrayHome, $arrayLink);
         }
 
-        return view('pages.trainee.home', compact('arrayHome'));
+        return  $arrayHome = [];
     }
 }

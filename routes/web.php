@@ -19,9 +19,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/home', function () {
-    return view('pages.trainee.home');
-})->name('home');
 Route::get('/report', function () {
     return view('pages.trainee.reportDaily');
 })->name('report');
@@ -31,19 +28,17 @@ Route::get('/historyReport', function () {
 Route::get('/profile', function () {
     return view('pages.trainee.profile');
 })->name('profile');
-Route::get('/detailSubject', function () {
-    return view('pages.trainee.detailSubject');
-})->name('detailSubject');
 Route::get('/detailReport', function () {
     return view('pages.trainee.detailReport');
 })->name('detailReport');
+Route::get('/', function () {
+    return view('welcome');
+})->name('detailReport')->middleware(['auth']);
 Route::resource('listCourse', CourseController::class);
 Route::resource('listSubject', SubjectController::class);
 Route::get('language/{language}', [LanguageController::class, 'index'])->name('language');
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/search', [CourseController::class, 'search'])->name('search');
 Route::get('/homeTrainee/{id}', [CourseTraineeController::class, 'homeTrainee'])->name('homeTrainee');
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('user', UserController::class);
 Route::get('/listCourse/detailSubject/{id}/{dateStart}', [SubjectController::class, 'showSub'])->name('showSbj');

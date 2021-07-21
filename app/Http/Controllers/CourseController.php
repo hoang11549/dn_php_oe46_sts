@@ -9,6 +9,9 @@ use App\Repository\Course\CourseRepositoryInterface;
 use App\Repository\Subject\SubjectRepositoryInterface;
 use App\Repository\User\UserRepositoryInterface;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Controllers\CourseTraineeController;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -16,20 +19,28 @@ class CourseController extends Controller
     protected $subjectRepository;
     protected $topicRepository;
     protected $userRepository;
+    protected $trainee;
 
     public function __construct(
         CourseRepositoryInterface $courseRepository,
         SubjectRepositoryInterface $subjectRepository,
         TopicRepositoryInterface $topicRepository,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        CourseTraineeController $trainee
     ) {
         $this->courseRepository = $courseRepository;
         $this->subjectRepository = $subjectRepository;
         $this->topicRepository = $topicRepository;
         $this->userRepository = $userRepository;
+        $this->trainee = $trainee;
+        $this->middleware('auth');
     }
 
-
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     /**
      * Display a listing of the resource.
      *
@@ -37,9 +48,16 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = $this->courseRepository->listPaginate(config('training.paginate_course'));
+        $id = Auth::user()->id;
+        if (Gate::allows('check-role')) {
+            $courses = $this->courseRepository->listPaginate(config('training.paginate_course'));
 
-        return view('pages.suppervisor.listCourse', compact('courses'));
+            return view('pages.suppervisor.listCourse', compact('courses'));
+        } else {
+            $arrayHome = [];
+            $arrayHome = $this->trainee->homeTrainee($id);
+            return view('pages.trainee.home', compact('arrayHome'));
+        }
     }
 
     /**
