@@ -68,4 +68,6 @@ return [
     'Save' => 'Lưu',
     'Image' => 'Ảnh',
     'WriteReport' => 'Viết báo cáo',
+    'lesson' => 'bai hoc',
+    'Pass' => 'đậu',
 ];

@@ -68,4 +68,6 @@ return [
     'Save' => 'Save',
     'Image' => 'Image',
     'WriteReport' => 'Write Report',
+    'lesson' => 'lesson',
+    'Pass' => 'Pass',
 ];

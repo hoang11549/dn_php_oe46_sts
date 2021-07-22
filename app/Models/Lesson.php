@@ -21,4 +21,8 @@ class Lesson extends Model
     {
         return $this->belongsTo(Subject::class, 'subject_id', 'id');
     }
+    public function reportLesson()
+    {
+        return $this->hasMany(ReportLesson::class);
+    }
 }
