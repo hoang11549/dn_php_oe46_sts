@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repository\Subject\SubjectRepositoryInterface;
 use App\Repository\Lesson\LessonRepositoryInterface;
+use App\Repository\ReportLesson\ReportLessonRepositoryInterface;
+use App\Repository\User\UserRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\isEmpty;
 
 class SubjectController extends Controller
 {
@@ -15,13 +20,19 @@ class SubjectController extends Controller
      */
     protected $subjectRepository;
     protected $lessonRepository;
+    protected $reportLessonRepository;
+    protected $userRepository;
 
     public function __construct(
         SubjectRepositoryInterface $subjectRepository,
-        LessonRepositoryInterface $lessonRepository
+        LessonRepositoryInterface $lessonRepository,
+        ReportLessonRepositoryInterface $reportLessonRepository,
+        UserRepositoryInterface $userRepository
     ) {
         $this->subjectRepository = $subjectRepository;
         $this->lessonRepository = $lessonRepository;
+        $this->reportLessonRepository = $reportLessonRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function index()
@@ -61,10 +72,21 @@ class SubjectController extends Controller
     {
         $subject = $this->subjectRepository->getWith('lessons')->findOrFail($request->id);
         $date = $this->subjectRepository->getDay($subject, $request->startday);
+        $idAuth = Auth::user()->id;
+        $listReport = $this->subjectRepository->getNested('lessons', 'lessons.reportLesson')->findOrFail($request->id);
+        $checked = [];
+        foreach ($listReport->lessons as $value) {
+            $pass = $this->lessonRepository->checkFunction($value, $idAuth);
+            array_push($checked, $pass);
+        }
+        $checkSubject = $this->subjectRepository->checkComplete($checked);
+        $arrayUser = $this->userRepository->findBeLongMany($subject, 'subject_id', 'users', 'user_id');
+        if ($checkSubject == config('training.check.pass') && $arrayUser == []) {
+            $subject->users()->attach($idAuth);
+        }
 
-        return view('pages.trainee.detailSubject', compact('subject', 'date'));
+        return view('pages.trainee.detailSubject', compact('subject', 'date', 'checked'));
     }
-
     public function show($id)
     {
     }

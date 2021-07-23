@@ -6,4 +6,5 @@ use App\Repository\RepositoryInterface;
 
 interface LessonRepositoryInterface extends RepositoryInterface
 {
+    public function checkFunction($value, $idAuth);
 }
