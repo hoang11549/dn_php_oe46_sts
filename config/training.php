@@ -3,10 +3,12 @@
 use Illuminate\Support\Str;
 
 return [
-    'paginate_course' => 10,
+    'paginate_course' => 9,
     'check' => [
         'pass' => 1,
         'fail' => 2,
         'dontCheck' => 0,
+        'active' => 1,
+        'dontActive' => 0
     ]
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Repository\Topic\TopicRepositoryInterface;
 use App\Repository\Course\CourseRepositoryInterface;
@@ -11,6 +12,7 @@ use App\Repository\User\UserRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -54,7 +56,8 @@ class CourseController extends Controller
             return view('pages.suppervisor.listCourse', compact('courses'));
         } else {
             $arrayHome = [];
-            $arrayHome = $this->trainee->homeTrainee($id);
+            $arrayHome = $this->trainee->homeTrainee();
+
             return view('pages.trainee.home', compact('arrayHome'));
         }
     }
@@ -67,7 +70,7 @@ class CourseController extends Controller
     public function create()
     {
         $subject = $this->subjectRepository->getAll();
-        $users = $this->userRepository->findWhere('role', 'Supervisor');
+        $users = $this->userRepository->findWhere('status', config('training.check.dontActive'));
 
         return view('pages.suppervisor.createCourse', compact('subject', 'users'));
     }
@@ -90,18 +93,22 @@ class CourseController extends Controller
         ];
         $courses = $this->courseRepository->create($reviewData);
         $course =  $this->courseRepository->find($courses->id);
+        if (!$course) {
+            return back()->withError('notCreate');
+        }
         $listSubject = $request->subject;
         foreach ($listSubject as $list) {
             $course->subjects()->attach($list);
         }
         $listUser = $request->user;
         foreach ($listUser as $list) {
+            $update = ["status" => (config('training.check.active')),];
+            $user = $this->userRepository->update($list, $update);
             $course->users()->attach($list);
         }
-
         $this->courseRepository->handleImg($request, $courses->id, 'courseImage');
 
-        return redirect()->route('listCourse.create');
+        return redirect()->route('listCourse.index');
     }
 
     /**
@@ -208,6 +215,9 @@ class CourseController extends Controller
         $course =  $this->courseRepository->findOrFail($courseId);
         if ($course) {
             if ($course->users()->detach($id)) {
+                $update = ["status" => (config('training.check.dontActive')),];
+                $user = $this->userRepository->update($update);
+
                 return redirect()->route('listCourse.show', ['listCourse' => $courseId]);
             }
 

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'role',
         'age',
         'address',
+        'status',
     ];
 
     /**
@@ -58,7 +59,7 @@ class User extends Authenticatable
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class, 'user_course', 'user_id', 'course_id');
+        return $this->belongsToMany(Course::class, 'user_course', 'user_id', 'course_id')->withPivot('status');
     }
 
     public function course()

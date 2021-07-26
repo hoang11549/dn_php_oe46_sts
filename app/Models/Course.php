@@ -27,7 +27,7 @@ class Course extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_course', 'course_id', 'user_id');
+        return $this->belongsToMany(User::class, 'user_course', 'course_id', 'user_id')->withPivot('status');
     }
 
     public function subjects()

@@ -37,13 +37,15 @@
             @endforeach
                 </div>
             </ul>
-    <table id="table" 
+            <table id="table" 
             data-toggle="table"
+            data-search="true"
             data-filter-control="true" 
             data-show-export="true"
             data-click-to-select="true"
+            data-toolbar="#toolbar"
             data-pagination="true"
-            data-toolbar="#toolbar">
+            >
         <thead>
             <tr>
                 <th data-field="state" data-checkbox="true"></th>

@@ -3,9 +3,11 @@
 <div class="detai-report">
     <h1>{{ $report->title }}</h1>
 	<h3>{{ $report->created_at }}</h3>
+    @can('check-role')
     <a href="{{ route('reportLesson.checkPass',['status'=>1,'id' => $report->id])}}">
         <button class="btn btn-primary">{{ trans('messages.Pass') }}</button>
     </a>
+    @endcan
     <div class="container">
         <div class="card white-box p-3">{!! $report->content !!}</div>
     </div>

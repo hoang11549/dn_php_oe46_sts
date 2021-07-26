@@ -1597,7 +1597,7 @@
                         sprintf(' data-index="%s"', i) +
                         sprintf(' name="%s"', that.options.selectItemName) +
                         sprintf(' type="%s"', type) +
-                        sprintf(' value="%s"', index) +
+                        sprintf(' value="%s"', data-index) +
                         sprintf(' checked="%s"', value === true ||
                         (value && value.checked) ? 'checked' : undefined) +
                         sprintf(' disabled="%s"', !column.checkboxEnabled ||
