@@ -17,6 +17,7 @@ class Course extends Model
         'duration',
         'user_id',
         'topic_id',
+        'status',
     ];
     protected $with = ['topic', 'owner'];
 

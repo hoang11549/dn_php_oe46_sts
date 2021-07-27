@@ -56,10 +56,10 @@ class ReportLessonController extends Controller
             "content" => $request->Report,
             "owner_id" => $authID,
             "lesson_id" => $request->lessonId,
-            "status" => config('traineing.check.dontCheck'),
+            "status" => config('training.check.dontCheck'),
         ];
         if ($this->reportLessonRepository->create($reportData)) {
-            return back()->with("success", trans('messages.review_created'));
+            return redirect()->back()->with("success", trans('messages.review_created'));
         } else {
             return back()->with("error", trans('messages.error_created'));
         }

@@ -79,10 +79,16 @@ class SubjectController extends Controller
             $pass = $this->lessonRepository->checkFunction($value, $idAuth);
             array_push($checked, $pass);
         }
-        $checkSubject = $this->subjectRepository->checkComplete($checked);
+        if ($checked == []) {
+        } else {
+            $checkSubject = $this->subjectRepository->checkComplete($checked);
+        }
+
         $arrayUser = $this->userRepository->findBeLongMany($subject, 'subject_id', 'users', 'user_id');
-        if ($checkSubject == config('training.check.pass') && $arrayUser == []) {
-            $subject->users()->attach($idAuth);
+        foreach ($arrayUser as $arr) {
+            if ($checkSubject == config('training.check.pass') && $arr->id != $idAuth) {
+                $subject->users()->attach($idAuth);
+            }
         }
 
         return view('pages.trainee.detailSubject', compact('subject', 'date', 'checked'));

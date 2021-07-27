@@ -72,4 +72,8 @@ return [
     'Pass' => 'Pass',
     'complete' => 'Complete',
     'uncomplete' => 'unComplete',
+    'Active' => 'Active',
+    'donthavelesson' => 'dont have lesson',
+    'CourseSb' => 'Course\' Subject ',
+    'finishCourse' => 'finish Course',
 ];

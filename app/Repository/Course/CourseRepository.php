@@ -68,4 +68,8 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
 
         return Response($output);
     }
+    public function updateStatus($userID, $course_id)
+    {
+        DB::table('user_course')->where(['user_id' => $userID, 'course_id' => $course_id]);
+    }
 }

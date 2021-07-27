@@ -13,4 +13,5 @@ interface CourseRepositoryInterface extends RepositoryInterface
     public function handleImg(Request $image, $arrayCourse, $nameImage);
 
     public function search($request, $coloum);
+    public function updateStatus($userID, $course_id);
 }

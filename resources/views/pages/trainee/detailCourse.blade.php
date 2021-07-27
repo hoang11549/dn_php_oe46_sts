@@ -15,10 +15,17 @@
       </ul>
     </div>
     <div class="description">
-      <h1>{{ $course->name }}(Active)</h1>
+      <h1>{{ $course->name }}({{ $status }})</h1>
       <h2>{{ $course->duration }} {{ trans('messages.day') }}</h2>
       <h2>{{ trans('messages.EndDay') }}: {{ $endday }}</h2>
       <h2>{{ trans('messages.author') }}:{{ $course->owner->name }}</h2>
+      @can('check-role')
+          @if($course->owner->id ==$auId)
+          <a href="{{ route('finishCourse',['id' => $course->id])}}">
+            <button class="btn btn-primary">{{ trans('messages.finishCourse') }}</button>
+        </a>
+          @endif
+      @endcan
     </div>
   </div>
   <div class="row">
@@ -91,6 +98,7 @@
                                 <div class="ms-2">
                                     <span class="text-dark">{{ $arrU->name }}</span>
                                 </div>
+                                @can('check-role')
                                 <div class="ms-1">
                                     <form action="{{ route('kickUser',['id'=>$arrU->id,'courseId'=>$course->id])}}" method="POST">
                                         {{ csrf_field() }}
@@ -100,6 +108,7 @@
                                         </button>
                                     </form>
                                 </div>
+                                @endcan
                             </a>
                         </li>
                     @endforeach
