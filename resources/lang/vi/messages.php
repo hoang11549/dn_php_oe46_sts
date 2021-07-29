@@ -70,6 +70,7 @@ return [
     'Image' => 'Ảnh',
     'WriteReport' => 'Viết báo cáo',
     'lesson' => 'bai hoc',
+    'addlesson' => 'bai hoc',
     'Pass' => 'đậu',
     'complete' => 'hoàn thành',
     'uncomplete' => 'chưa hoàn thành',
@@ -81,4 +82,5 @@ return [
     'status' => 'trạng thái',
     'finish' => 'kết thúc',
     'freetime' => 'rãnh rỗi',
+    'description' => 'chi tiết ',
 ];

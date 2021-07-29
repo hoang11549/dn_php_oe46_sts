@@ -93,7 +93,7 @@
                 <ul class="chatonline">
                     @foreach ($arrayUser as $arrU)
                         <li>  
-                            <a href="javascript:void(0)" class="d-flex align-items-center">
+                            <a href="{{ route('user.show',['user' => $arrU->id]) }}" class="d-flex align-items-center">
                                 <img src="{{ asset( $arrU->image->url) }}" alt="user-img" class="img-circle">
                                 <div class="ms-2">
                                     <span class="text-dark">{{ $arrU->name }}</span>

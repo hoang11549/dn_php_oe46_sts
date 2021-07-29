@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseTraineeController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Auth;
@@ -53,3 +54,5 @@ Route::get('report/check', [ReportLessonController::class, 'checkPass'])->name('
 Route::resource('user', UserController::class);
 Route::post('createUser', [UserController::class, 'createUser'])->name('userCreateUser');
 Route::delete('/kick-user/{id}/{courseId}', [CourseController::class, 'kickUser'])->name('kickUser');
+/* Lesson Controller*/
+Route::resource('lesson', LessonController::class);

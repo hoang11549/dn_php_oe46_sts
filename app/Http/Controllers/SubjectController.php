@@ -57,7 +57,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.suppervisor.createSubject');
     }
 
     /**
@@ -68,7 +68,13 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Data = [
+            "duration" => $request->duration,
+            "name"  =>  $request->name,
+            "description" => $request->description,
+        ];
+        $subject = $this->subjectRepository->create($Data);
+        return redirect()->route('listSubject.index');
     }
 
     /**
@@ -115,7 +121,9 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subject = $this->subjectRepository->findOrFail($id);
+
+        return view('pages.suppervisor.editSubject', compact('subject'));
     }
 
     /**
@@ -127,7 +135,13 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Data = [
+            "duration" => $request->duration,
+            "name"  =>  $request->name,
+            "description" => $request->description,
+        ];
+        $subject = $this->subjectRepository->update($id, $Data);
+        return redirect()->route('listSubject.index');
     }
 
     /**
@@ -138,6 +152,10 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($this->subjectRepository->delete($id)) {
+            return redirect()->route('listSubject.index');
+        }
+
+        return back()->withError('notDelete');
     }
 }

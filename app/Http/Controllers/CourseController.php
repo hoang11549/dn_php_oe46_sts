@@ -72,7 +72,6 @@ class CourseController extends Controller
     {
         $listTopic = $this->topicRepository->getAll();
         $subject = $this->subjectRepository->getAll();
-
         $users = $this->userRepository->findWhere('status', config('training.check.dontActive'));
         $supervisor = $this->userRepository->findWhere('role', 'Supervisor');
 
