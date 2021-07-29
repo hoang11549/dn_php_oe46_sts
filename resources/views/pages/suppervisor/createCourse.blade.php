@@ -14,8 +14,11 @@
   <div class="form-group">
     <label for="exampleFormControlSelect1">{{ trans('messages.Topic') }}</label>
     <select class="form-control" id="exampleFormControlSelect1" name="topic">
-        <option value="1">PHP</option>
-        <option value="2">Ruby</option>
+        @foreach($listTopic as $topic)
+            <option value="{{ $topic->id }}">
+                {{ $topic->name }}
+            </option>
+        @endforeach
     </select>
     </div>
     <div class="form-group"> 

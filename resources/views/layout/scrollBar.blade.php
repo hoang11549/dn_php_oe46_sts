@@ -23,24 +23,26 @@
                 </li>
                 {{-- @elseif(Auth::user()->role ===UserRole::TRAINEE) --}}
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('profile') }}"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('user.show',['user' => Auth::user()->id]) }}"
                         aria-expanded="false">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <span class="hide-menu">{{ trans('messages.Profile') }}</span>
                     </a>
                 </li>
+                @can('check-role')
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('reportLesson.index')}}"
+                        aria-expanded="false">
+                        <i class="fa fa-columns" aria-hidden="true"></i>
+                        <span class="hide-menu">{{ trans('messages.ListReport') }}</span>
+                    </a>
+                </li>
+                @endcan
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('report') }}"
                         aria-expanded="false">
                         <i class="fa fa-table" aria-hidden="true"></i>
                         <span class="hide-menu">{{ trans('messages.CreateReport') }}</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('historyReport')}}"
-                        aria-expanded="false">
-                        <i class="fa fa-columns" aria-hidden="true"></i>
-                        <span class="hide-menu">{{ trans('messages.ListReport') }}</span>
                     </a>
                 </li>
             {{-- @endif  --}}

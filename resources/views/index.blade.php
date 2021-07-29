@@ -25,6 +25,8 @@
     <!--bower-->
     <link rel="stylesheet" href="{{ asset('bower_components/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/mystyle.css') }}">
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+
     <!--JS-->  
     <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 </head>
@@ -55,7 +57,7 @@
             <!-- Container fluid  -->
      @yield('content')
             <!-- End Container fluid  -->
-     
+            <script src="{{ asset('assets/js/ajaxSearchCourse.js') }}"></script>
             <!-- footer -->
      
             <footer class="footer text-center"> 2021 © Sun* System 
@@ -94,5 +96,7 @@
     <script src="{{ asset('assets/js/pages/dashboards/dashboard1.js') }}"></script>
     <script src="{{ asset('assets/js/checkBox.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrapTable.js') }}"></script>
+    <!--search-->
+ 
 </body>
 </html>

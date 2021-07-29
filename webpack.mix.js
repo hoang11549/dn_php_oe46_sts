@@ -42,5 +42,6 @@ mix.js('resources/js/pages/dashboards/dashboard1.js','public/assets/js/pages/das
 mix.js('resources/js/cket.js','public/assets/js/cket.js')
 mix.js('resources/js/checkBox.js','public/assets/js/checkBox.js')
 mix.js('resources/js/bootstrapTable.js','public/assets/js/bootstrapTable.js')
+mix.js('resources/js/ajaxSearchCourse.js','public/assets/js/ajaxSearchCourse.js')
 /**--------scss------------- */
 mix.sass('resources/sass/card.scss','public/assets/css/card.css')
