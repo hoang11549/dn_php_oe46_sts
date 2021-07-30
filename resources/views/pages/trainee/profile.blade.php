@@ -38,8 +38,13 @@
                         <div class="form-group mb-4">
                             <label class="col-md-12 p-0">{{ trans('messages.FullName') }}</label>
                             <div class="col-md-12 border-bottom p-0" >
-                                <input type="text" name="name"
-                                    class="form-control p-0 border-0" value="{{ $user->name }}"></div>
+                                @if( $user->id==Auth::user()->id)
+                                <input type="text" name="name"class="form-control p-0 border-0" value="{{ $user->name }}">
+                                @else
+                                <input type="text" name="name"class="form-control p-0 border-0" readonly
+                                 value="{{ $user->name }}">
+                                @endif
+                            </div>
                         </div>
                         <div class="form-group mb-4">
                             <label for="example-email" class="col-md-12 p-0">{{ trans('messages.Email') }}</label>
@@ -52,19 +57,49 @@
                         <div class="form-group mb-4">
                             <label class="col-md-12 p-0">{{ trans('messages.Address') }}</label>
                             <div class="col-md-12 border-bottom p-0">
+                                @if( $user->id==Auth::user()->id)
                                 <input type="text" value="{{ $user->address }}" name="address"
-                                    class="form-control p-0 border-0"> </div>
+                                    class="form-control p-0 border-0"> 
+                                @else
+                                <input type="text" value="{{ $user->address }}" name="address"
+                                    class="form-control p-0 border-0" readonly> 
+                                @endif
+                                </div>
                         </div>
                         <div class="form-group mb-4">
                             <label class="col-md-12 p-0">{{ trans('messages.Age') }}</label>
                             <div class="col-md-12 border-bottom p-0">
+                                @if($user->id==Auth::user()->id)
                                 <input type="text" value="{{ $user->age }}" name ="age"
-                                    class="form-control p-0 border-0"> </div>
+                                    class="form-control p-0 border-0"> 
+                                @else
+                                <input type="text" value="{{ $user->age }}" name ="age"
+                                    class="form-control p-0 border-0" readonly>
+                                @endif
+                                </div>  
                         </div>
+                        @can('check-role')
+                        <div class="form-group mb-4">
+                            <label class="col-md-12 p-0">{{ trans('messages.Role') }}</label>
+                            <select class="form-control"  name="role">
+                                @can('check-role')
+                                <option value="Supervisor">{{ trans('messages.Supervisor') }}</option>
+                                <option value="trainee" selected>{{ trans('messages.trainee') }}</option>
+                                @endcan
+                            </select>
+                        </div>
+                        @endcan
                         <div class="form-group mb-4">
                             <div class="col-sm-12">
-                                <button class="btn btn-success">{{ trans('messages.UpPro') }}</button>
-                                <input type="reset"class="btn btn-primary" value="Reset">
+                                @if($user->id==Auth::user()->id)
+                                    <button class="btn btn-success">{{ trans('messages.UpPro') }}</button>
+                                    <input type="reset"class="btn btn-primary" value="Reset">
+                                @else
+                                @can('check-role')
+                                    <button class="btn btn-success">{{ trans('messages.UpPro') }}</button>
+                                    <input type="reset"class="btn btn-primary" value="Reset">
+                                @endcan
+                                @endif
                             </div>
                         </div>
                     </form>
@@ -73,7 +108,6 @@
         </div>
         <!-- Column -->
     </div>
-    <!-- Row -->
-      
+    <!-- Row --> 
 </div>
 @endsection

@@ -4,6 +4,12 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input type="search" id="search" name='search'placeholder="{{ trans('messages.Search') }}" />
+                        <input type="hidden" class="routeSearch" value="{{ Route('searchUser') }}"/>
+                    </div>
+                </div>
                 <h3 class="box-title">{{ trans('messages.ListUser') }}</h3>
                 <div class="table-responsive">
                     <table class="table text-nowrap">
@@ -55,4 +61,5 @@
         </div>
     </div>  
 </div>
+
 @endsection

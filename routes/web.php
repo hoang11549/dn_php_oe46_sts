@@ -54,5 +54,6 @@ Route::get('report/check', [ReportLessonController::class, 'checkPass'])->name('
 Route::resource('user', UserController::class);
 Route::post('createUser', [UserController::class, 'createUser'])->name('userCreateUser');
 Route::delete('/kick-user/{id}/{courseId}', [CourseController::class, 'kickUser'])->name('kickUser');
+Route::get('/searchUser', [UserController::class, 'search'])->name('searchUser');
 /* Lesson Controller*/
 Route::resource('lesson', LessonController::class);

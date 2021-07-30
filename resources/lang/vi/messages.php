@@ -83,4 +83,8 @@ return [
     'finish' => 'kết thúc',
     'freetime' => 'rãnh rỗi',
     'description' => 'chi tiết ',
+    'Role' => 'vai trò',
+    'trainee' => 'thực tập sinh',
+    'Supervisor' => 'người hướng dẫn',
+    'ReportLesson' => 'Report Lesson',
 ];

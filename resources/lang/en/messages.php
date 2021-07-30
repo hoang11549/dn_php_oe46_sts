@@ -83,4 +83,7 @@ return [
     'finish' => 'finish',
     'freetime' => 'free time',
     'description' => 'description',
+    'Role' => 'Role',
+    'trainee' => 'trainee',
+    'Supervisor' => 'Supervisor',
 ];

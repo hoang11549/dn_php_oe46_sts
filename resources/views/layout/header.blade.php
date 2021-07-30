@@ -39,16 +39,17 @@
                         
                     </div>
                 </li>
+                @can('check-role')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('register') }}">{{ trans('messages.Register') }}</a>
                 </li>
+                @endcan
                 <li>
                     <a class="profile-pic" href="#">
                         {{-- <img class="avatar" src="{{ asset($users->image->url) }}" alt=""> --}}
                     <input type="button" class="btn btn-dark" value="Logout"
                         onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();"
-                    >
+                            document.getElementById('logout-form').submit();">
                 </li>
             </ul>
         </div>

@@ -32,7 +32,7 @@ class UserController extends Controller
     public function index()
     {
         if (Gate::allows('check-role')) {
-            $users = $this->userRepository->paginateUser('role', 'trainee');
+            $users = $this->userRepository->listPaginate(config('training.paginate_course'));
 
             return view('pages.suppervisor.users.listUser', compact('users'));
         } else {
@@ -101,12 +101,21 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = $this->userRepository->findOrFail($id);
-        $editData =
-            [
+        if (Gate::allows('check-role')) {
+            $editData =
+                [
+                    "name" => $request->name,
+                    "age" => $request->age,
+                    "address" => $request->address,
+                    "role" => $request->role,
+                ];
+        } else {
+            $editData = [
                 "name" => $request->name,
                 "age" => $request->age,
                 "address" => $request->address,
             ];
+        }
         $courses = $this->userRepository->update($id, $editData);
         if ($request->has('avatar')) {
             $updateImage = $this->userRepository->handleImgAva($request, $id, 'avatar');
@@ -125,6 +134,15 @@ class UserController extends Controller
     {
         if ($this->userRepository->delete($id)) {
             return redirect()->route('user.index');
+        }
+
+        return back()->withError('notDelete');
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            return $this->userRepository->search($request, 'name');
         }
 
         return back()->withError('notDelete');
