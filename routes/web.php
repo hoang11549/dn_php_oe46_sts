@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseTraineeController;
+use App\Http\Controllers\DailyReportController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
@@ -57,3 +58,6 @@ Route::delete('/kick-user/{id}/{courseId}', [CourseController::class, 'kickUser'
 Route::get('/searchUser', [UserController::class, 'search'])->name('searchUser');
 /* Lesson Controller*/
 Route::resource('lesson', LessonController::class);
+/*ReportDaijly*/
+Route::resource('reportDaily', DailyReportController::class);
+Route::get('historyReport', [DailyReportController::class, 'historyReport'])->name('historyReport');

@@ -30,28 +30,22 @@
   </div>
   <div class="row">
     <!-- .col -->
-   
     <div class="col-md-12 col-lg-8 col-sm-12">
         <div class="white-box">
             <h2>{{ trans('messages.CourseSb') }}</h2>
         <!--TEst Line time-------->
     <div class="wrapper">
         <div class="center-line">
-
-
             <a href="#" class="scroll-icon"><i class="fas fa-caret-up"></i></a>
         </div>
-        
             <div class="row row-1">
                 <div class="row-x"> 
                     <i class="icon fas fa-play-circle"></i>
                <div class="details">
                 <span class="title"></span>
             </div>
-            <p></p>
         </div>
             </div>
-     
         @foreach($arraySubject as $key => $subject)
             @if($key==0 || $key%2==0)
                 <div class="row row-1">
@@ -74,7 +68,6 @@
                         @else
                           <h3>{{ trans('messages.uncomplete') }}</h3>
                         @endif
-                        
                         <div class="bottom">
                             <a href="{{ route('showSbj', [$subject->id,$date[$key] ]) }}">{{ trans('messages.read') }}</a>
                         </div>
@@ -91,6 +84,14 @@
             </div>
             <div class="card-body">
                 <ul class="chatonline">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                         href="{{ route('reportDaily.index',['course'=>$course->id])}}"
+                            aria-expanded="false">
+                            <i class="fa fa-columns" aria-hidden="true"></i>
+                            <span class="hide-menu">{{ trans('messages.ListReport') }}</span>
+                        </a>
+                    </li>
                     @foreach ($arrayUser as $arrU)
                         <li>  
                             <a href="{{ route('user.show',['user' => $arrU->id]) }}" class="d-flex align-items-center">
@@ -100,14 +101,15 @@
                                 </div>
                                 @can('check-role')
                                 <div class="ms-1">
-                                    <form action="{{ route('kickUser',['id'=>$arrU->id,'courseId'=>$course->id])}}" method="POST">
+                                    <form action="{{ route('kickUser',['id'=>$arrU->id,'courseId'=>$course->id])}}" 
+                                        method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
-                                        <button type="submit">
+                                        <button type="submit" id="submit">
                                             <i class="fas fa-user-minus"></i>
                                         </button>
                                     </form>
-                                </div>
+                                </div>   
                                 @endcan
                             </a>
                         </li>
@@ -117,5 +119,6 @@
         </div>
     </div>
     <!-- /.col -->
+</div>
 </div>
 @endsection

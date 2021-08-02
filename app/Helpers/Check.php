@@ -8,8 +8,6 @@ function userComplete($auId, $User = [])
         foreach ($User as $u) {
             if ($u->id == $auId) {
                 $CheckSbj = true;
-            } else {
-                $CheckSbj = false;
             }
         }
     }

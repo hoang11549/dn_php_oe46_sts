@@ -40,14 +40,8 @@
             @endforeach
                 </div>
             </ul>
-            <table id="table" 
-            data-toggle="table"
-            data-search="true"
-            data-filter-control="true" 
-            data-show-export="true"
-            data-click-to-select="true"
-            data-toolbar="#toolbar"
-            data-pagination="true"
+            <label for="">{{ trans('messages.trainee') }}</label>
+            <table class="table"
             >
         <thead>
             <tr>
@@ -67,6 +61,36 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->created_at }}</td>
                     <td>{{ $user->email }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <label for="">{{ trans('messages.Supervisor') }}</label>
+    <table id="table" 
+            data-toggle="table"
+            data-search="true"
+            data-filter-control="true" 
+            data-show-export="true"
+            data-click-to-select="true"
+            data-toolbar="#toolbar"
+            >
+        <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+                <th data-field="ex" data-filter-control="input" data-sortable="true">{{ trans('messages.Id') }}</th>
+                <th data-field="examen" data-filter-control="select" data-sortable="true">{{ trans('messages.FullName') }}</th>
+                
+                <th data-field="prenom" data-sortable="true">{{ trans('messages.Email') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($supervisor as $key => $sup)
+                <tr >
+                    <td class="bs-checkbox "><input data-index={{ $sup->id }}
+                        value={{ $sup->id }} name="user[]" type="checkbox"></td>
+                    <td>{{ $sup->id }}</td>
+                    <td>{{ $sup->name }}</td>
+                    <td>{{ $sup->email }}</td>
                 </tr>
             @endforeach
         </tbody>

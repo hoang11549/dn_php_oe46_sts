@@ -134,10 +134,15 @@ class CourseController extends Controller
             $UserCheckSbj = [];
             $auId = Auth::user()->id;
             $chekcCourse = true;
+
             foreach ($arraySubject as $key => $arr) {
                 $User = $this->userRepository->findBeLongMany($arr, 'subject_id', 'users', 'user_id');
+
                 $CheckSbj = userComplete($auId, $User);
+
+
                 array_push($UserCheckSbj, $CheckSbj);
+
                 if ($CheckSbj == false) {
                     $chekcCourse = false;
                 }

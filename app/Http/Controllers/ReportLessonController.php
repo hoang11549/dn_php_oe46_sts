@@ -38,8 +38,10 @@ class ReportLessonController extends Controller
     public function create(Request $request)
     {
         $lessonId = $request->id;
+        $date = $request->date;
+        $idSubject = $request->idSubject;
 
-        return view('pages/trainee/reportLesson', compact('lessonId'));
+        return view('pages/trainee/reportLesson', compact('lessonId', 'date', 'idSubject'));
     }
 
     /**
@@ -59,7 +61,8 @@ class ReportLessonController extends Controller
             "status" => config('training.check.dontCheck'),
         ];
         if ($this->reportLessonRepository->create($reportData)) {
-            return redirect()->back()->with("success", trans('messages.review_created'));
+            return redirect()->route('showSbj', ['id' => $request->idSubject, 'dateStart' => $request->date])
+                ->with("success", trans('messages.review_created'));
         } else {
             return back()->with("error", trans('messages.error_created'));
         }
@@ -137,6 +140,7 @@ class ReportLessonController extends Controller
             "status" => config('training.check.pass'),
         ];
         $courses = $this->reportLessonRepository->update($request->id, $reportData);
+
         if ($courses == false) {
             return back()->with("error", trans('messages.error_updated'));
         }
