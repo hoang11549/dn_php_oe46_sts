@@ -41,11 +41,6 @@ class Course extends Model
         return $this->morphOne(Image::class, 'imgable');
     }
 
-    public function commentReport()
-    {
-        return $this->morphMany(CommentReport::class, 'comment_parent');
-    }
-
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

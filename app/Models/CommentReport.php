@@ -25,6 +25,11 @@ class CommentReport extends Model
 
     public function replies()
     {
-        return $this->hasMany(CommentReport::class, 'comment_parent_id', 'id');
+        return $this->hasMany(CommentReport::class, 'comment_parent_id');
+    }
+
+    public function report()
+    {
+        return $this->belongsTo(ReportLesson::class, 'report_id', 'id');
     }
 }

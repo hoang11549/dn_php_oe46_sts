@@ -18,6 +18,7 @@ class ReportLesson extends Model
         'owner_id',
         'status',
     ];
+    protected $with = ['comments'];
 
     public function lessons()
     {
@@ -31,6 +32,6 @@ class ReportLesson extends Model
 
     public function comments()
     {
-        return $this->hasMany(CommentReport::class, 'report_id', 'id');
+        return $this->hasMany(CommentReport::class)->whereNull('comment_parent_id');
     }
 }

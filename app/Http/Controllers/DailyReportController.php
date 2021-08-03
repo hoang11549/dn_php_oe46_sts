@@ -99,7 +99,6 @@ class DailyReportController extends Controller
     {
         $report = $this->reportDailyRepository->getWith('owner')->findOrFail($id);
 
-
         return view('pages.trainee.detaiReportDaily', compact('report'));
     }
 

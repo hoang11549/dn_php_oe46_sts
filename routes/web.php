@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CourseController;
@@ -61,3 +62,5 @@ Route::resource('lesson', LessonController::class);
 /*ReportDaijly*/
 Route::resource('reportDaily', DailyReportController::class);
 Route::get('historyReport', [DailyReportController::class, 'historyReport'])->name('historyReport');
+/**Comment Controller */
+Route::resource('comments', CommentReport::class);
