@@ -50,6 +50,6 @@ class ReportLessonTest extends ModelsTestCase
 
         $relation = $model->comments();
 
-        $this->assertHasManyRelation($relation, $model, new CommentReport());
+        $this->assertHasManyRelation($relation, $model, new CommentReport(), 'report_id');
     }
 }

@@ -23,7 +23,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function getWith($coloum)
     {
-        return $this->model::with($coloum);
+        return $this->model::with($coloum)->get();
     }
 
     public function find($id)

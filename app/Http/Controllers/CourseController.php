@@ -123,7 +123,7 @@ class CourseController extends Controller
 
     public function show($id)
     {
-        $course = $this->courseRepository->getWith(['topic', 'owner'])->findOrFail($id);
+        $course = $this->courseRepository->findOrFail($id);
         $arrayUser = $this->userRepository->findBeLongMany($course, 'course_id', 'users', 'user_id');
         if ($course) {
             $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id', 'subjects', 'subject_id');
@@ -182,7 +182,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $course = $this->courseRepository->getWith('topic')->findOrFail($id);
+        $course = $this->courseRepository->findOrFail($id);
         $listTopic = $this->topicRepository->getAll();
         if ($course) {
             $arraySubject = $this->subjectRepository->findBeLongMany($course, 'course_id', 'subjects', 'subject_id');
