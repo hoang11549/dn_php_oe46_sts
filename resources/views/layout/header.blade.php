@@ -5,7 +5,6 @@
                 <b class="logo-text">
                     <img src="{{ asset('images/users/sunLogo.png') }}" alt="homepage" />
                 </b>
-               
             </a>
             <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
                 href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
@@ -13,6 +12,33 @@
         <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
 
             <ul class="navbar-nav ms-auto d-flex align-items-center">
+                <li class="dropdown dropdown-notifications">
+                    <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+                        <i data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
+                    </a>
+                    <div class="dropdown-container">
+                        <div class="dropdown-toolbar">
+                            <h3 class="dropdown-toolbar-title">{{ trans('messages.Notifications') }} (<span class="notif-count">0</span>)</h3>
+                        </div>
+                        <ul class="dropdown-menu">
+                            @foreach (Auth::user()->notifications as $notification)
+                            <li class="notification active">
+                                <div class="media">
+                                  <div class="media-left">
+                                  </div>
+                                  <div class="media-body">
+                                    <strong class="notification-title">{{ trans('messages.courseNoti1') }} {{ $notification->data['Auth'] }}
+                                        {{ trans('messages.courseNoti2') }} {{ $notification->data['nameCourse'] }}</strong>
+                                    <div class="notification-meta">
+                                      <small class="timestamp">{{ trans('messages.timeAgo') }}</small>
+                                    </div>
+                                  </div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <a href="{{ route('language', ['vi']) }}">🇻🇳</a>
                     <a href="{{ route('language', ['en']) }}">🏴󠁧󠁢󠁥󠁮󠁧󠁿</a>
@@ -53,5 +79,4 @@
                 </li>
             </ul>
         </div>
-    </nav>
 </header>

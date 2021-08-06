@@ -12,5 +12,9 @@ return [
         'dontActive' => 0,
         'finish' => 1,
         'dontfinish' => 0,
+    ],
+    'Notify' => [
+        'courseCreate' => 1,
+        'studentfree' => 2,
     ]
 ];

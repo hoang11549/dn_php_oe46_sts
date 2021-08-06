@@ -21,6 +21,7 @@
     "counterup": "^1.0.0",
     "ckeditor": "#full/4.13.0",
     "font-awesome": "fontawesome#^5.15.3",
-    "jquery-validation": "jquery.validate#^1.13.0"
+    "jquery-validation": "jquery.validate#^1.13.0",
+    "bootstrap": "3.3.7"
   }
 }

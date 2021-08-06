@@ -11,6 +11,10 @@
     <meta name="description"
         content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
+    <meta name="video" content="{{ Auth::user()->id}} ">
+    @can('check-role')
+    <meta name="role" content="{{ Auth::user()->role}} ">
+    @endcan
     <link rel="stylesheet" href="{{ asset('assets/css/search.css') }}">
     <link href="{{ asset('assets/css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/flexCard.css') }}" rel="stylesheet">
@@ -21,9 +25,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/buttonAdd.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/checkBox.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/tableBootstrap.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('assets/css/notifyCation.css') }}">
     <!--bower-->
-    <link rel="stylesheet" href="{{ asset('bower_components/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/boostrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/mystyle.css') }}">
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 
@@ -76,12 +81,15 @@
     <!-- All Jquery -->
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="{{ asset('bootstrap/dist/js/bootstrap.bundle.min.js ')}}"></script>
-    <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js ')}}"></script>
+    <script src="{{ asset('/bower_components/dist/js/bootstrap.bundle.min.js ')}}"></script>
+    <script src="{{ asset('/bower_components/pusher-js/dist/web/pusher.min.js') }}"></script>
+    <script src="{{ asset('/bower_components/boostrap/dist/js/bootstrap.min.js ')}}"></script>
+    <script src="{{ asset('/bower_components/bootstrap/dist/js/bootstrap.min.js ')}}"></script>
     <script src="{{ asset('assets/js/app-style-switcher.js') }}"></script>
     <script src="{{ asset('/bower_components/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('/bower_components/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('/bower_components/font-awesome/js/all.min.js') }}"></script>
+
     <!--------------Code by Member------------------->
     <!--Wave Effects -->
     <script src="{{ asset('assets/js/waves.js') }}"></script>
@@ -99,5 +107,7 @@
     <!--search-->
     <script src="{{ asset('assets/js/ajax-search-user.js') }}"></script>
     <script src="{{ asset('assets/js/ajaxSearchCourse.js') }}"></script>
+    <!--Pussher-->
+    <script src="{{ asset('assets/js/notification.js') }}"></script>
 </body>
 </html>

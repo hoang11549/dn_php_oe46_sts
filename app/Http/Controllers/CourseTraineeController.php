@@ -27,6 +27,7 @@ class CourseTraineeController extends Controller
         $arrayCourse = $this->courseRepository->findBeLongMany(Auth::user(), 'user_id', 'courses', 'course_id');
         $arrayLink = [];
         $arrayHome = [];
+
         foreach ($arrayCourse as $key => $value) {
             $arrayLink['urlImg'] = $value->image->url;
             $course = $value->with('owner')->first();

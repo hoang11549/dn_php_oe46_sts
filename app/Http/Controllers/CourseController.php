@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\User;
+use App\Notifications\NotifiCourse;
 use Illuminate\Http\Request;
 use App\Repository\Topic\TopicRepositoryInterface;
 use App\Repository\Course\CourseRepositoryInterface;
@@ -13,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Pusher\Pusher;
 
 class CourseController extends Controller
 {
@@ -91,11 +93,12 @@ class CourseController extends Controller
             "name"  =>  $request->nameCourse,
             "start_date" => date('Y-m-d', $inputDate),
             "duration" => $request->duration,
-            "user_id" => config('training.check.active'),
+            "user_id" => Auth::user()->id,
             "topic_id" => $request->topic,
         ];
         $courses = $this->courseRepository->create($reviewData);
         $course =  $this->courseRepository->find($courses->id);
+        $this->courseRepository->handleImg($request, $courses->id, 'courseImage');
         if (!$course) {
             return back()->withError('notCreate');
         }
@@ -104,12 +107,37 @@ class CourseController extends Controller
             $course->subjects()->attach($list);
         }
         $listUser = $request->user;
+        $data = [
+            'nameCourse' => $request->nameCourse,
+            'type' => config('training.Notify.courseCreate'),
+            'Auth' => Auth::user()->name,
+        ];
+
         foreach ($listUser as $list) {
             $update = ["status" => (config('training.check.active')),];
             $user = $this->userRepository->update($list, $update);
             $course->users()->attach($list);
+            $user = $this->userRepository->findOrFail($list);
+            $user->notify(new NotifiCourse($data));
         }
-        $this->courseRepository->handleImg($request, $courses->id, 'courseImage');
+        $dataPusher = [
+            'nameCourse' => $request->nameCourse,
+            'type' => config('training.Notify.courseCreate'),
+            'listUser' => $listUser,
+            'Auth' => Auth::user()->name,
+        ];
+        $options = array(
+            'cluster' => 'ap1',
+            'encrypted' => true
+        );
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $pusher->trigger('NotificationEvent', 'send-message-', $dataPusher);
 
         return redirect()->route('listCourse.index');
     }

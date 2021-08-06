@@ -89,5 +89,9 @@ return [
     'trainee' => 'thực tập sinh',
     'Supervisor' => 'người hướng dẫn',
     'ReportLesson' => 'Report Lesson',
-    'AddComment' => 'thêm bình luận'
+    'AddComment' => 'thêm bình luận',
+    'Notifications' => 'Thông báo',
+    'courseNoti1' => 'Bạn đã được',
+    'courseNoti2' => 'đưa vào khóa học:',
+    'timeAgo' => '1 phut truoc',
 ];
