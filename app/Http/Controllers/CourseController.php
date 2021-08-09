@@ -52,10 +52,8 @@ class CourseController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-
         if (Gate::allows('check-role')) {
             $courses = $this->courseRepository->listPaginate(config('training.paginate_course'));
-
             return view('pages.suppervisor.listCourse', compact('courses'));
         } else {
             $arrayHome = [];

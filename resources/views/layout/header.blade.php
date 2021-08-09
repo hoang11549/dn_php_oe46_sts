@@ -22,6 +22,20 @@
                         </div>
                         <ul class="dropdown-menu">
                             @foreach (Auth::user()->notifications as $notification)
+                            @if($notification->data['type']==config('training.Notify.studentfree'))
+                            <li class="notification active">
+                                <div class="media">
+                                    <div class="media-left">   
+                                    </div>
+                                    <div class="media-body">
+                                    <strong class="notification-title">{{ trans('messages.TraineeFree') }}  </strong>
+                                     <div class="notification-meta">
+                                        <small class="timestamp">about a minute ago</small>
+                                    </div>
+                                    </div>
+                                </div>
+                            </li>
+                            @elseif($notification->data['type']==config('training.Notify.courseCreate'))
                             <li class="notification active">
                                 <div class="media">
                                   <div class="media-left">
@@ -35,6 +49,8 @@
                                   </div>
                                 </div>
                             </li>
+                            @endif
+                           
                             @endforeach
                         </ul>
                     </div>
@@ -62,7 +78,6 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
-                        
                     </div>
                 </li>
                 @can('check-role')

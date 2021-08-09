@@ -7,6 +7,7 @@ var notificationsWrapper   = $('.dropdown-notifications');
             encrypted: true,
             cluster: "ap1"
         });
+        /**send-message- */
         var channel = pusher.subscribe('NotificationEvent');
         var id = $('meta[name="video"]').attr("content");
         channel.bind("send-message-", function(data) {
@@ -38,4 +39,36 @@ var notificationsWrapper   = $('.dropdown-notifications');
                     break;
                 }
             }
+        });
+        /**send-Trainee-free- */
+        var channelFree = pusher.subscribe('TraineeFreeEvents');
+        var role = $('meta[name="role"]').attr("content");
+        channelFree.bind("send-Trainee-free-", function(data) {
+                console.log(data.role);
+                var roleCheck=data.role.toString();
+                console.log(roleCheck.charAt(1)==role.charAt(1));
+                
+                if(roleCheck.charAt(1)==role.charAt(1))
+                {
+                    var existingNotifications = notifications.html();
+                    var newNotificationHtml = `
+                    <li class="notification active">
+                        <div class="media">
+                            <div class="media-left">   
+                            </div>
+                            <div class="media-body">
+                            <strong class="notification-title">List Trainee Free </strong>
+                             
+                            </div>
+                        </div>
+                    </li>
+                    `;
+                    notifications.html(newNotificationHtml + existingNotifications);
+                    notificationsCount += 1;
+                    notificationsCountElem.attr('data-count', notificationsCount);
+                    notificationsWrapper.find('.notif-count').text(notificationsCount);
+                    notificationsWrapper.show();
+            
+                }
+            
         });
