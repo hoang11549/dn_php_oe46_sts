@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/mystyle.css') }}">
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
     <!--JS-->  
     <script src="{{ asset('bower_components/ckeditor/ckeditor.js') }}"></script>
 </head>
@@ -111,5 +111,7 @@
     <script src="{{ asset('assets/js/ajaxSearchCourse.js') }}"></script>
     <!--Pussher-->
     <script src="{{ asset('assets/js/notification.js') }}"></script>
+    <!-- Chart JS-->
+    <script src="{{ asset('/assets/js/pages/chartCourse.js') }}"></script>
 </body>
 </html>

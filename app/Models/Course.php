@@ -50,4 +50,14 @@ class Course extends Model
     {
         return $this->hasMany(Report::class);
     }
+
+    public function scopeMonth($query, $month)
+    {
+        return $query->whereMonth('created_at', $month);
+    }
+
+    public function scopeYear($query, $year)
+    {
+        return $query->whereYear('start_date', $year);
+    }
 }

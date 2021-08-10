@@ -68,8 +68,16 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
 
         return Response($output);
     }
+
     public function updateStatus($userID, $course_id)
     {
         DB::table('user_course')->where(['user_id' => $userID, 'course_id' => $course_id]);
+    }
+
+    public function countMonth($month, $year)
+    {
+        $count = $this->model::month($month)->year($year)->get()->count();
+
+        return $count;
     }
 }
